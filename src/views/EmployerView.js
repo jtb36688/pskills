@@ -1,5 +1,7 @@
 import React from 'react';
 import EmployerHome from '../components/Employer/EmployerHome'
+import {} from 'reactstrap';
+
 
 class EmployerView extends React.Component {
     constructor(props) {
