@@ -1,0 +1,21 @@
+.MainNav {
+  text-align:center;
+}
+
+.MainNav a {
+  margin-right: 5%;
+}
+
+.PrisonListWrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.AppContainer {
+}
+
+.PrisonCard {
+  width: 17%;
+  margin-left: 2.5%;
+  margin-top: 15px;
+}
