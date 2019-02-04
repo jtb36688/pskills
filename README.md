@@ -101,6 +101,12 @@ This app contains two user types. A prison admin (who has the ability to log in)
 
 Stretch Goal: A single user could search for prisons by entering their zip code and defining a search radius. An admin can upload a pdf of a prisoner’s resume. A single user can click a contact us form to inquire about a prisoner.
 
+Complementary Colors ------
+#2a2f4a blue
+#3f4a2a green
+#4a352a red
+
+
 Project Checklist ------
 
 - Pair Program with UI and Back-End Architect

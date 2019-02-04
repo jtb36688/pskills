@@ -1,5 +1,8 @@
 import React from "react";
-import {} from 'reactstrap';
+import {} from "reactstrap";
+import Axios from 'axios';
+
+const host = "http://localhost:5000/"
 
 const Authentication = AdminView => Login =>
   class extends React.Component {
@@ -7,78 +10,78 @@ const Authentication = AdminView => Login =>
       super(props);
       this.state = {
         loggedIn: false,
-        username: '',
-        password: ''
+        username: "",
+        password: ""
       };
     }
 
     componentDidMount() {
-      if (localStorage.getItem("logindata")) {
-        this.setState({
-          loggedIn: JSON.parse(localStorage.getItem("logindata")).loggedIn,
-          username: JSON.parse(localStorage.getItem("logindata")).username
-        });
-      }
-    }
-
-    componentDidUpdate() {
-      localStorage.setItem("logindata", JSON.stringify(this.state));
+      console.log('Authentication Mounted')
     }
 
     handleChanges = e => {
       this.setState({ [e.target.name]: e.target.value });
-    }
+    };
 
     submitLogin = e => {
       e.preventDefault();
-      if (
-        (!this.state.username) || (!this.state.password)
-      ) {
+      if (!this.state.username || !this.state.password) {
         this.setState({
-          username: '',
-          password: ''
-        })
-        alert("Invalid login, please enter Username and Password")
+          username: "",
+          password: ""
+        });
+        alert("Invalid login, please enter Username and Password");
+      } else {
+        Axios.post(`${host}/api/login`, this.state)
+          .then(
+            function(response) {
+              Request.headers.append(
+                "Authorization",
+                `Token ${response.data.key}`
+              );
+            },
+            this.setState({
+              username: "",
+              password: ""
+            })
+          )
+          .catch(function(error) {
+            alert(error.response.data.error);
+          });
       }
-      else {
-        this.setState({
-          loggedIn: true,
-        })
-      }
-    }
+    };
 
     handleLogOut = () => {
       this.setState({
         loggedIn: false,
-        username: '',
-        password: ''
-      })
-    }
-
+        username: "",
+        password: ""
+      });
+    };
 
     conditionalRender = () => {
       if (this.state.loggedIn) {
-        return <AdminView
-        username={this.state.username}
-        handleLogOut={this.handleLogOut}/>
+        return (
+          <AdminView
+            username={this.state.username}
+            handleLogOut={this.handleLogOut}
+          />
+        );
       } else {
-        return <Login 
-        password={this.state.password}
-        username={this.state.username}
-        handleChanges={this.handleChanges}
-        submitLogin={this.submitLogin} />
+        return (
+          <Login
+            password={this.state.password}
+            username={this.state.username}
+            handleChanges={this.handleChanges}
+            submitLogin={this.submitLogin}
+          />
+        );
       }
     };
 
-
-
     render() {
-      return (
-        this.conditionalRender()
-      )
+      return this.conditionalRender();
     }
-
-
   };
 
 export default Authentication;

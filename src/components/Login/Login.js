@@ -60,10 +60,11 @@ align-items: baseline;
 const UsernameInput = styled.input`
 margin-left: 20px;
 border: 0;
-background-color: #8b9dc3;
-color: white;
+color: black;
+background-color: #ffffff;
 height: 40px;
 border-radius: 3px;
+font-size: 1.8rem;
 text-align: center;
 width: 60%;
 font-weight: bold;
@@ -72,9 +73,10 @@ font-weight: bold;
 const PasswordInput = styled.input`
 margin-left: 20px;
 border: 0;
-background-color: #8b9dc3;
-color: white;
+color: black;
+background-color: #ffffff;
 height: 40px;
+font-size: 1.8rem;
 border-radius: 3px;
 text-align: center;
 width: 60%;
@@ -87,7 +89,7 @@ height: 50px;
 width: 100px;
 border-radius: 5px;
 color: white;
-background-color: #3b5998;
+background-color: #4a352a
 `
 
 
