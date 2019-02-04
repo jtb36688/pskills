@@ -5,16 +5,16 @@ const Navigation = () => {
     return (
       <div className="MainNav">
         <Link  to="/">
-          Home
+          HOME
         </Link>
         <Link  to="/employers/">
-          Find Workers
+          FIND WORKERS
         </Link>
         <Link  to="/admin/">
-          Admin Login
+          ADMIN LOGIN
         </Link>
         <Link  to="/help/">
-          Contact Us / Help
+          CONTACT US / HELP
         </Link>
       </div>
     );

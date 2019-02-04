@@ -1,9 +1,18 @@
 .MainNav {
-  text-align:center;
+  padding-left: 10%;
+  background-color: #2a2f4a;
 }
 
 .MainNav a {
-  margin-right: 5%;
+  display: inline-block;
+  margin-right: 8%;
+  color: #ffffff;
+  padding: 10px 0px;
+  cursor: default;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  line-height: 3.25em;
+  text-transform: uppercase;
 }
 
 .PrisonListWrapper {

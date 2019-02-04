@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import styled, { css } from "styled-components";
 
 const LoginContainer = styled.div`
-background-color: #f7f7f7;
+background-color: #2a2f4a;
 width: 100%;
 height: 100%;
-font-family: Neue Helvetica;
-font-size: 18px;
+font-size: 1.8rem;
+font-family: "Source Sans Pro", Helvetica, sans-serif;
 h1 {
-  font-family: Verdana;
   font-size: 28px;
 }
 `

@@ -5,6 +5,10 @@ class EmployerView extends React.Component {
     constructor(props) {
         super(props)
     }
+
+    componentDidMount() {
+        console.log('EmployerView Mounted')
+    }
     render() {
         return (
             <EmployerHome prisonsarray={this.props.prisonsarray} />
