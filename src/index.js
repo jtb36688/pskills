@@ -17,9 +17,9 @@ import Login from "./components/Login/Login";
 import MarketingView from "./views/MarketingView";
 import Navigation from "./components/Navigation/Navigation";
 
-import AdminHome from "./components/Admin/AdminHome"
+import AdminHome from "./components/Admin/AdminHome";
 
-const store = createStore(rootReducer(applyMiddleware(thunk, logger)));
+const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 const mockarray = [
   {
@@ -50,12 +50,12 @@ const mockarray = [
     adminusers: [],
     workerscount: 215
   },
-  { 
+  {
     id: 4,
     name: "bossjail",
     location: "boss",
     adminusers: [],
-    workerscount: 225 
+    workerscount: 225
   },
   {
     id: 5,
@@ -71,7 +71,7 @@ const mockarray = [
     adminusers: [],
     workerscount: 245
   }
-]
+];
 
 class App extends React.Component {
   constructor(props) {
@@ -94,16 +94,7 @@ class App extends React.Component {
             <EmployerView prisonsarray={this.state.prisonsarray} {...props} />
           )}
         />
-        <Route
-          path="/admin/"
-          render={props => (
-            <AdminHome
-              {...props}
-              username={this.props.username}
-              handleLogOut={this.props.handleLogOut}
-            />
-          )}
-        />
+        <Route path="/admin/" render={props => <AdminView {...props} />} />
         <Route path="/help/" render={props => <HelpView {...props} />} />
       </div>
     );

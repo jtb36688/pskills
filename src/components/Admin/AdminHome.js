@@ -7,7 +7,8 @@ import {
   InputGroup,
   InputGroupText,
   InputGroupAddon,
-  Input
+  Input,
+  Button
 } from "reactstrap";
 
 class AdminHome extends React.Component {
@@ -20,7 +21,6 @@ class AdminHome extends React.Component {
         skills: ""
       },
       dropdownOpen: false,
-      dropdownSelected: ""
     };
   }
 
@@ -60,12 +60,24 @@ class AdminHome extends React.Component {
     });
   };
 
+  handleSubmit = (e, newworker) => {
+      e.preventDefault();
+      this.setState({
+        newworker: {
+            name: "",
+            workleave: false,
+            skills: ""
+          }
+      })
+  }
+
+
   render() {
     return (
-      <form className='WorkerFormWrapper'>
+      <form className='WorkerFormWrapper' onSubmit={(e) => this.handleSubmit(e, this.state.newworker)}>
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText>New Worker Name:</InputGroupText>
+            <InputGroupText className='Purple'>Worker Name:</InputGroupText>
           </InputGroupAddon>
           <Input
             value={this.state.newworker.name}
@@ -78,10 +90,10 @@ class AdminHome extends React.Component {
             isOpen={this.state.dropdownOpen}
             toggle={this.toggleDropDown}
           >
-            <DropdownToggle caret>
+            <DropdownToggle className='Purple' caret>
               {this.state.newworker.workleave
-                ? `Available for Work Leave`
-                : `Not Available for Work Leave`}
+                ? `AVAILABLE FOR WORK LEAVE`
+                : `NOT AVAILABLE FOR WORK LEAVE`}
             </DropdownToggle>
             <DropdownMenu>
               <DropdownItem onClick={this.toggleWlOn}>
@@ -96,7 +108,7 @@ class AdminHome extends React.Component {
         </InputGroup>
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText>New Worker Skills (Seperate /w Commas):</InputGroupText>
+            <InputGroupText className='Purple'>New Worker Skills (Seperate /w Commas):</InputGroupText>
           </InputGroupAddon>
           <Input
             value={this.state.newworker.skills}
@@ -105,6 +117,7 @@ class AdminHome extends React.Component {
             onChange={this.handleChanges}
           />
         </InputGroup>
+        <Button className='Purple' type="submit">Add Worker</Button>
       </form>
     );
   }

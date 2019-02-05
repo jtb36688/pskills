@@ -17,7 +17,7 @@ const Prison = props => {
         <CardText>
           Location: {props.location}
         </CardText>
-        <Button>View Workers</Button>
+        <Button className='Purple'>View Workers</Button>
       </CardBody>
     </Card>
   );

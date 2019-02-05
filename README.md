@@ -103,8 +103,8 @@ Stretch Goal: A single user could search for prisons by entering their zip code 
 
 Complementary Colors ------
 #2a2f4a blue
-#3f4a2a green
-#4a352a red
+#2a4a45 green
+#372a4a purple
 
 
 Project Checklist ------

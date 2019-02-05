@@ -32,5 +32,11 @@
 }
 
 .WorkerFormWrapper {
-  
+  padding: 0 20%;
+  background-color: #2a2f4a;
+}
+
+.Purple {
+  background-color: #372a4a;
+  color: #ffffff
 }

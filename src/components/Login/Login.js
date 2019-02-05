@@ -89,7 +89,7 @@ height: 50px;
 width: 100px;
 border-radius: 5px;
 color: white;
-background-color: #4a352a
+background-color: #372a4a
 `
 
 
