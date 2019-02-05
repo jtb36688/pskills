@@ -17,6 +17,8 @@ import Login from "./components/Login/Login";
 import MarketingView from "./views/MarketingView";
 import Navigation from "./components/Navigation/Navigation";
 
+import AdminHome from "./components/Admin/AdminHome"
+
 const store = createStore(rootReducer(applyMiddleware(thunk, logger)));
 
 const mockarray = [
@@ -95,7 +97,7 @@ class App extends React.Component {
         <Route
           path="/admin/"
           render={props => (
-            <ConditionalView
+            <AdminHome
               {...props}
               username={this.props.username}
               handleLogOut={this.props.handleLogOut}

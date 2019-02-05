@@ -1,8 +1,8 @@
 import React from "react";
 import {} from "reactstrap";
-import Axios from 'axios';
+import Axios from "axios";
 
-const host = "http://localhost:5000/"
+const loginEndpoint = "http://localhost:5000/";
 
 const Authentication = AdminView => Login =>
   class extends React.Component {
@@ -16,7 +16,7 @@ const Authentication = AdminView => Login =>
     }
 
     componentDidMount() {
-      console.log('Authentication Mounted')
+      console.log("Authentication Mounted");
     }
 
     handleChanges = e => {
@@ -32,22 +32,9 @@ const Authentication = AdminView => Login =>
         });
         alert("Invalid login, please enter Username and Password");
       } else {
-        Axios.post(`${host}/api/login`, this.state)
-          .then(
-            function(response) {
-              Request.headers.append(
-                "Authorization",
-                `Token ${response.data.key}`
-              );
-            },
-            this.setState({
-              username: "",
-              password: ""
-            })
-          )
-          .catch(function(error) {
-            alert(error.response.data.error);
-          });
+        Axios.post(loginEndpoint, this.state)
+          .then(res => Request.headers.append("Authorization", res.data.token))
+          .catch(err => alert(err.response.data.error));
       }
     };
 
