@@ -3,9 +3,9 @@ import React from 'react'
 const Worker = props => {
     return (
         <div>
-            {this.props.worker.name}
-            {this.props.worker.workleave}
-            {this.props.worker.skills}
+            <p className='text'>{props.worker.name}</p>
+            <p className='text'>{props.worker.availability}</p>
+            <p className='text'>{props.worker.skills}</p>
         </div>
     )
 }

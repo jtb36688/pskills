@@ -17,15 +17,17 @@ class AdminHome extends React.Component {
     this.state = {
       newworker: {
         name: "",
-        workleave: false,
+        picture: "",
+        prisonId: "",
+        availability: false,
         skills: ""
       },
-      dropdownOpen: false,
+      dropdownOpen: false
     };
   }
 
   componentDidUpdate() {
-      console.log(this.state.newworker)
+    console.log(this.state.newworker);
   }
 
   toggleDropDown = () =>
@@ -37,7 +39,7 @@ class AdminHome extends React.Component {
     this.setState({
       newworker: {
         ...this.state.newworker,
-        workleave: true
+        availability: true
       }
     });
   };
@@ -46,7 +48,7 @@ class AdminHome extends React.Component {
     this.setState({
       newworker: {
         ...this.state.newworker,
-        workleave: false
+        availability: false
       }
     });
   };
@@ -61,23 +63,28 @@ class AdminHome extends React.Component {
   };
 
   handleSubmit = (e, newworker) => {
-      e.preventDefault();
-      this.setState({
-        newworker: {
-            name: "",
-            workleave: false,
-            skills: ""
-          }
-      })
-  }
-
+    e.preventDefault();
+    this.props.addWorker(this.state.newworker)
+    this.setState({
+      newworker: {
+        name: "",
+        picture: "mock",
+        prisonId: "mock",
+        availability: false,
+        skills: ""
+      }
+    });
+  };
 
   render() {
     return (
-      <form className='WorkerFormWrapper' onSubmit={(e) => this.handleSubmit(e, this.state.newworker)}>
+      <form
+        className="WorkerFormWrapper"
+        onSubmit={e => this.handleSubmit(e, this.state.newworker)}
+      >
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText className='Purple'>Worker Name:</InputGroupText>
+            <InputGroupText className="Purple">Worker Name:</InputGroupText>
           </InputGroupAddon>
           <Input
             value={this.state.newworker.name}
@@ -90,8 +97,8 @@ class AdminHome extends React.Component {
             isOpen={this.state.dropdownOpen}
             toggle={this.toggleDropDown}
           >
-            <DropdownToggle className='Purple' caret>
-              {this.state.newworker.workleave
+            <DropdownToggle className="Purple" caret>
+              {this.state.newworker.availability
                 ? `AVAILABLE FOR WORK LEAVE`
                 : `NOT AVAILABLE FOR WORK LEAVE`}
             </DropdownToggle>
@@ -108,7 +115,9 @@ class AdminHome extends React.Component {
         </InputGroup>
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
-            <InputGroupText className='Purple'>New Worker Skills (Seperate /w Commas):</InputGroupText>
+            <InputGroupText className="Purple">
+              New Worker Skills (Seperate /w Commas):
+            </InputGroupText>
           </InputGroupAddon>
           <Input
             value={this.state.newworker.skills}
@@ -117,7 +126,9 @@ class AdminHome extends React.Component {
             onChange={this.handleChanges}
           />
         </InputGroup>
-        <Button className='Purple' type="submit">Add Worker</Button>
+        <Button className="Purple" type="submit">
+          Add Worker
+        </Button>
       </form>
     );
   }

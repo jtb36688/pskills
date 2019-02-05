@@ -2,8 +2,6 @@ import React from "react";
 import Worker from "./Worker";
 
 const blankobject = {
-  id: "",
-  updatedata: {
     id: "",
     name: "",
     picture: "",
@@ -11,13 +9,13 @@ const blankobject = {
     availability: "",
     skills: ""
   }
-};
+;
 
 class Workers extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatingarray: [blankobject]
+      updatingarray: []
     };
   }
   render() {
