@@ -120,3 +120,4 @@ Monday Zoom Checklist -----
 - Build your own Github Organization and add Team Members there ALL MEMBERS of your team INCLUDING PMS need to have access to your orgs.
 - All Project's file structures scaffolded and project architecture decided. 
 - Find a template from a site like HTML5 Up and use that templates color scheme/design flow for your app. 
+
