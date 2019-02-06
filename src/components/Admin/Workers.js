@@ -40,6 +40,9 @@ class Workers extends React.Component {
   render() {
     return (
       <div>
+        <div className="WorkersTableHeader">
+          
+        </div>
         {this.props.linkedworkersStore.map(worker => (
           <Worker updateWorker={this.props.updateWorker}  deleteWorker={this.props.deleteWorker} worker={worker} key={worker.id} />
         ))}

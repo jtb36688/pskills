@@ -5,6 +5,7 @@ import {} from 'reactstrap';
 
 const LoginContainer = styled.div`
 background-color: #2a2f4a;
+color: white;
 width: 100%;
 height: 100%;
 font-size: 1.8rem;
@@ -128,6 +129,7 @@ const Login = props => {
             </InputsButtonsDiv>
           </LoginForm>
         </LoginDialog>
+        <button onClick={props.toggleRegister}> Register New User </button>
       </LoginContainer>
     );
   };

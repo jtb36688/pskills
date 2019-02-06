@@ -12,10 +12,6 @@ import {
 import { connect } from "react-redux";
 import Workers from "../components/Admin/Workers";
 
-const loginobject = {
-  username: "jacob",
-  password: "bryan"
-};
 
 class AdminView extends React.Component {
   constructor(props) {
@@ -25,27 +21,26 @@ class AdminView extends React.Component {
   }
 
   componentDidMount() {
-    this.retrieveAuth();
     this.props.getLinkedWorkers();
     ;
   }
 s
 
-  retrieveAuth = () => {
-    console.log("authrequest")
-    axios
-      .post(
-        `https://prisoner-skills-backend.herokuapp.com/api/users/login`,
-        loginobject
-      )
-      .then(function(response) {       
-        console.log(`${response.data.token}`)
-        localStorage.setItem('jwt', `${response.data.token}`)
-      })
-      .catch(function(error) {
-        alert(error.response.data.error);;
-      });
-  };
+  // retrieveAuth = () => {
+  //   console.log("authrequest")
+  //   axios
+  //     .post(
+  //       `https://prisoner-skills-backend.herokuapp.com/api/users/login`,
+  //       loginobject
+  //     )
+  //     .then(function(response) {       
+  //       console.log(`${response.data.token}`)
+  //       localStorage.setItem('jwt', `${response.data.token}`)
+  //     })
+  //     .catch(function(error) {
+  //       alert(error.response.data.error);;
+  //     });
+  // };
 
   initiateUpdate = id => {
     this.setState({
