@@ -16,44 +16,18 @@ import Workers from "../components/Admin/Workers";
 class AdminView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
   }
 
   componentDidMount() {
     this.props.getLinkedWorkers();
     ;
   }
-s
-
-  // retrieveAuth = () => {
-  //   console.log("authrequest")
-  //   axios
-  //     .post(
-  //       `https://prisoner-skills-backend.herokuapp.com/api/users/login`,
-  //       loginobject
-  //     )
-  //     .then(function(response) {       
-  //       console.log(`${response.data.token}`)
-  //       localStorage.setItem('jwt', `${response.data.token}`)
-  //     })
-  //     .catch(function(error) {
-  //       alert(error.response.data.error);;
-  //     });
-  // };
-
-  initiateUpdate = id => {
-    this.setState({
-      updatingId: `${id}`
-    });
-  };
-
-  // initiateUpdate and updatingId will probably be removed/replaced, i'm not updating from forms
 
   render() {
     return (
       <>
         <AdminHome
+          handleLogOut={this.props.handleLogOut}
           getLinkedWorkers={this.props.getLinkedWorkers}
           addWorker={this.props.addWorker}
         />
@@ -61,7 +35,6 @@ s
         updateWorker={this.props.updateWorker}
           deleteWorker={this.props.deleteWorker}
           linkedworkersStore={this.props.linkedworkersStore}
-          initiateUpdate={this.initiateUpdate}
           error={this.props.errorStore}
         />
       </>
@@ -78,9 +51,3 @@ export default connect(
   mapStateToProps,
   { getLinkedWorkers, addWorker, updateWorker, deleteWorker }
 )(AdminView);
-
-// {this.props.prisonsarrayadminsvalues.includes(this.props.username) ? (
-//   <AdminHome username={this.props.username} />
-// ) : (
-//   <PrisonFactory username={this.props.username} />
-// )}

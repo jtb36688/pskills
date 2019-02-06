@@ -82,6 +82,7 @@ class AdminHome extends React.Component {
         className="WorkerFormWrapper"
         onSubmit={e => this.handleSubmit(e, this.state.newworker)}
       >
+      <Button size="lg" onClick={this.props.handleLogOut}>Log Out</Button>
         <InputGroup size="lg">
           <InputGroupAddon addonType="prepend">
             <InputGroupText className="Purple">Worker Name:</InputGroupText>

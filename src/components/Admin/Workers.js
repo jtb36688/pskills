@@ -1,15 +1,7 @@
 import React from "react";
 import Worker from "./Worker";
 
-const blankobject = {
-    id: "",
-    name: "",
-    picture: "",
-    prisonId: "",
-    availability: "",
-    skills: ""
-  }
-;
+
 
 class Workers extends React.Component {
   constructor(props) {
@@ -20,7 +12,6 @@ class Workers extends React.Component {
   }
 
   fillUpdateForms = workerdata => {
-    console.log(`filling forms for ${workerdata.id}`);
     this.setState({
       updatesarray: [
         ...this.state.updatesarray,
@@ -34,7 +25,6 @@ class Workers extends React.Component {
         }
       ]
     })
-    console.log(this.state.updatesarray);
   }
 
   render() {

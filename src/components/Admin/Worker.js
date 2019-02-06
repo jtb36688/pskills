@@ -142,7 +142,3 @@ class Worker extends React.Component {
 }
 
 export default Worker;
-
-// updatedata: this.props.updatesarray.find(function(prisonerobject) {
-//     return prisonerobject.id === this.props.worker.id;
-//   }, this)

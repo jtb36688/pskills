@@ -2,6 +2,7 @@ import React from "react";
 import {} from "reactstrap";
 import axios from "axios";
 import Register from "./Register";
+import { withRouter, Route } from "react-router-dom";
 
 const loginEndpoint =
   "https://prisoner-skills-backend.herokuapp.com/api/users/login";
@@ -21,11 +22,15 @@ const Authentication = AdminView => Login =>
     }
 
     componentDidMount() {
+      this.authCheck();
       console.log("Authentication Mounted");
     }
 
+    authCheck() {
+      localStorage.getItem("jwt") && this.setState({ loggedin: true });
+    }
+
     handleChanges = e => {
-      console.log(this.state.login);
       this.setState({
         login: {
           ...this.state.login,
@@ -34,14 +39,27 @@ const Authentication = AdminView => Login =>
       });
     };
 
+    handleLogOut = () => {
+      window.localStorage.clear();
+      this.setState({
+        loggedin: false,
+        login: {
+          username: "",
+          password: ""
+        }
+      });
+      this.props.history.push("/");
+    };
+
     retrieveAuth = () => {
       axios
         .post(`${loginEndpoint}`, this.state.login)
         .then(function(response) {
           localStorage.setItem("jwt", `${response.data.token}`);
-        }, this.setState({ loggedin: true }))
+        })
+        .then(() => this.authCheck())
         .catch(function(error) {
-          alert(error.response.data.error);
+          alert(error);
         });
     };
 
@@ -60,24 +78,10 @@ const Authentication = AdminView => Login =>
       }
     };
 
-    handleRegister = (e, registerlogin) => {
-      return "";
-    };
-
     toggleRegister = () => {
       this.setState(currentState => ({
         registering: !currentState.registering
       }));
-    };
-
-    handleLogOut = () => {
-      this.setState({
-        loggedin: false,
-        login: {
-          username: "",
-          password: ""
-        }
-      });
     };
 
     conditionalRender = () => {

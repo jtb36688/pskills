@@ -14,10 +14,8 @@ import Authentication from "./components/Login/Authentication";
 import EmployerView from "./views/EmployerView";
 import HelpView from "./views/HelpView";
 import Login from "./components/Login/Login";
-import MarketingView from "./views/MarketingView";
 import Navigation from "./components/Navigation/Navigation";
-
-import AdminHome from "./components/Admin/AdminHome";
+import { withRouter } from "react-router-dom"
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -79,22 +77,22 @@ class App extends React.Component {
     this.state = {
       prisonsarray: mockarray,
       workersarray: [],
-      username: ""
     };
   }
+
+
 
   render() {
     return (
       <div className="AppContainer">
-        <Navigation />
-        <Route exact path="/" render={props => <MarketingView {...props} />} />
+      <Route path="/(|help)/" component={Navigation} />
         <Route
-          path="/employers/"
+          exact path="/"
           render={props => (
             <EmployerView prisonsarray={this.state.prisonsarray} {...props} />
           )}
         />
-        <Route path="/admin/" render={props => <ConditionalView {...props} />} />
+        <Route path="/admin/" render={props => <ConditionalView authCheck={this.authCheck} loggedin={this.state.loggedin} {...props} />} />
         <Route path="/help/" render={props => <HelpView {...props} />} />
       </div>
     );
@@ -102,11 +100,12 @@ class App extends React.Component {
 }
 
 const ConditionalView = Authentication(AdminView)(Login);
+const AppWithRouter = withRouter(App)
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <App />
+      <AppWithRouter />
     </Router>
   </Provider>,
   document.getElementById("root")

@@ -13,7 +13,7 @@ class HelpView extends React.Component {
 
     render() {
         return (
-            ''
+            "Hello World!"
         )
     }
 }
