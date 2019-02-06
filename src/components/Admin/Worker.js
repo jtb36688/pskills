@@ -4,7 +4,8 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input
+  Input,
+  Table
 } from "reactstrap";
 
 class Worker extends React.Component {
@@ -56,7 +57,11 @@ class Worker extends React.Component {
     return (
       <div>
         {this.state.showasform ? (
-          <form onSubmit={(e) => this.submitHandler(e, this.state.updatedata, this.props.worker.id)}>
+          <form
+            onSubmit={e =>
+              this.submitHandler(e, this.state.updatedata, this.props.worker.id)
+            }
+          >
             {this.state.updatedata.name.toUpperCase()}
             <InputGroup>
               <InputGroupAddon addonType="prepend">
@@ -99,21 +104,33 @@ class Worker extends React.Component {
             <Button type="submit"> Apply Updating </Button>
           </form>
         ) : (
-          <div>
-            <p className="text">{this.props.worker.name}</p>
-            <p className="text">{this.props.worker.availability}</p>
-            <p className="text">{this.props.worker.skills}</p>
-            <Button
-              onClick={() => this.props.deleteWorker(this.props.worker.id)}
-            >
-              {" "}
-              Delete Worker{" "}
-            </Button>
-            <Button onClick={() => this.toggleUpdate(this.props.worker)}>
-              {" "}
-              Update Worker{" "}
-            </Button>
-            P
+            <div className="WorkerDetails">
+          <Table>
+          <tbody>
+          <tr className="TableRow">
+            <th className="text" scope="row">{this.props.worker.id}</th>
+            <td className="text">{this.props.worker.name}</td>
+            <td className="text">{this.props.worker.availability}</td>
+            <td className="text">{this.props.worker.skills}</td>
+          </tr>
+            </tbody>
+            </Table>
+            <div>
+              <Button
+                size="sm"
+                onClick={() => this.props.deleteWorker(this.props.worker.id)}
+              >
+                {" "}
+                Delete Worker{" "}
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => this.toggleUpdate(this.props.worker)}
+              >
+                {" "}
+                Update Worker{" "}
+              </Button>
+            </div>
           </div>
         )}
       </div>

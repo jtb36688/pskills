@@ -43,4 +43,14 @@
 
 .text {
   color: black;
+  text-align: left;
+}
+
+.TableRow {
+  display: flex;
+}
+.WorkerDetails{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
