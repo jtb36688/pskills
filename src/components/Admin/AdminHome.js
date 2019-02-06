@@ -26,10 +26,6 @@ class AdminHome extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    console.log(this.state.newworker);
-  }
-
   toggleDropDown = () =>
     this.setState(currentState => ({
       dropdownOpen: !currentState.dropdownOpen
@@ -57,6 +53,8 @@ class AdminHome extends React.Component {
     this.setState({
       newworker: {
         ...this.state.newworker,
+        picture: "mock",
+        prisonId: 123,
         [event.target.name]: event.target.value
       }
     });
@@ -68,8 +66,8 @@ class AdminHome extends React.Component {
     this.setState({
       newworker: {
         name: "",
-        picture: "mock",
-        prisonId: "mock",
+        picture: "",
+        prisonId: null,
         availability: false,
         skills: ""
       }

@@ -13,7 +13,7 @@ import { connect } from "react-redux";
 import Workers from "../components/Admin/Workers";
 
 const loginobject = {
-  username: "jtb",
+  username: "jacob",
   password: "bryan"
 };
 
@@ -21,7 +21,6 @@ class AdminView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      updatingId: ""
     };
   }
 
@@ -30,6 +29,7 @@ class AdminView extends React.Component {
     this.props.getLinkedWorkers();
     ;
   }
+s
 
   retrieveAuth = () => {
     console.log("authrequest")
@@ -38,13 +38,12 @@ class AdminView extends React.Component {
         `https://prisoner-skills-backend.herokuapp.com/api/users/login`,
         loginobject
       )
-      .then(function(response) {
-        Request.headers.append("Authorization", `${response.data.token}`);
-        console.log("Headers Log", Request.headers);
+      .then(function(response) {       
+        console.log(`${response.data.token}`)
+        localStorage.setItem('jwt', `${response.data.token}`)
       })
       .catch(function(error) {
-        alert(error.response.data.error);
-        console.log(error);
+        alert(error.response.data.error);;
       });
   };
 
@@ -60,10 +59,11 @@ class AdminView extends React.Component {
     return (
       <>
         <AdminHome
+          getLinkedWorkers={this.props.getLinkedWorkers}
           addWorker={this.props.addWorker}
-          updateWorker={this.props.updateWorker}
         />
         <Workers
+        updateWorker={this.props.updateWorker}
           deleteWorker={this.props.deleteWorker}
           linkedworkersStore={this.props.linkedworkersStore}
           initiateUpdate={this.initiateUpdate}
