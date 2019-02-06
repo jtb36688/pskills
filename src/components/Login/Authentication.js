@@ -1,6 +1,6 @@
 import React from "react";
 import {} from "reactstrap";
-import Axios from "axios";
+import axios from "axios";
 
 const loginEndpoint = "http://localhost:5000/";
 
@@ -9,9 +9,11 @@ const Authentication = AdminView => Login =>
     constructor(props) {
       super(props);
       this.state = {
-        loggedIn: false,
-        username: "",
-        password: ""
+        loggedin: false,
+        login: {
+          username: "",
+          password: ""
+        }
       };
     }
 
@@ -23,31 +25,47 @@ const Authentication = AdminView => Login =>
       this.setState({ [e.target.name]: e.target.value });
     };
 
+    retrieveAuth = () => {
+      console.log("authrequest");
+      axios
+        .post(`${loginEndpoint}`, this.state.login)
+        .then(function(response) {
+          console.log(`${response.data.token}`);
+          localStorage.setItem("jwt", `${response.data.token}`);
+        })
+        .catch(function(error) {
+          alert(error.response.data.error);
+        });
+    };
+
     submitLogin = e => {
       e.preventDefault();
       if (!this.state.username || !this.state.password) {
         this.setState({
-          username: "",
-          password: ""
+          login: {
+            username: "",
+            password: ""
+          }
         });
         alert("Invalid login, please enter Username and Password");
       } else {
-        Axios.post(loginEndpoint, this.state)
-          .then(res => Request.headers.append("Authorization", res.data.token))
-          .catch(err => alert(err.response.data.error));
+        this.retrieveAuth();
+        this.setState({ loggedin: true });
       }
     };
 
     handleLogOut = () => {
       this.setState({
-        loggedIn: false,
-        username: "",
-        password: ""
+        loggedin: false,
+        login: {
+          username: "",
+          password: ""
+        }
       });
     };
 
     conditionalRender = () => {
-      if (this.state.loggedIn) {
+      if (this.state.loggedin) {
         return (
           <AdminView
             username={this.state.username}

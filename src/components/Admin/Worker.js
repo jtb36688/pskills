@@ -96,12 +96,12 @@ class Worker extends React.Component {
               </InputGroupAddon>
             </InputGroup>
 
-            <Button onClick={() => this.toggleUpdate(this.props.worker.id)}>
+            <Button className='Purple' onClick={() => this.toggleUpdate(this.props.worker.id)}>
               {" "}
               Cancel Updating{" "}
             </Button>
 
-            <Button type="submit"> Apply Updating </Button>
+            <Button className='Purple' type="submit"> Apply Updating </Button>
           </form>
         ) : (
             <div className="WorkerDetails">
@@ -118,13 +118,16 @@ class Worker extends React.Component {
             <div>
               <Button
                 size="sm"
+                className='Purple'
                 onClick={() => this.props.deleteWorker(this.props.worker.id)}
               >
                 {" "}
                 Delete Worker{" "}
+                
               </Button>
               <Button
                 size="sm"
+                className='Purple'
                 onClick={() => this.toggleUpdate(this.props.worker)}
               >
                 {" "}

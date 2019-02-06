@@ -94,7 +94,7 @@ class App extends React.Component {
             <EmployerView prisonsarray={this.state.prisonsarray} {...props} />
           )}
         />
-        <Route path="/admin/" render={props => <AdminView {...props} />} />
+        <Route path="/admin/" render={props => <ConditionalView {...props} />} />
         <Route path="/help/" render={props => <HelpView {...props} />} />
       </div>
     );
