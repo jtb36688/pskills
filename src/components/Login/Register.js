@@ -35,7 +35,7 @@ class Register extends React.Component {
   render() {
     return (
       <div>
-        <h2 className="text">Register User</h2>
+        <h2>Register User</h2>
         <form onSubmit={this.handleRegister}>
           <input
             name="username"
