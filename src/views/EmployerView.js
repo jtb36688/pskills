@@ -15,6 +15,14 @@ class EmployerView extends React.Component {
     };
   }
 
+  clearViewing = () => {
+    this.setState({
+      viewingprison: false,
+      currentlyviewing: ""
+    })
+    console.log("clearing view", this.state)
+  }
+
   toggleViewing = id => {
     console.log("toggling view", this.state);
     this.setState(currentState => ({
@@ -35,6 +43,7 @@ class EmployerView extends React.Component {
           path="/"
           render={props => (
             <EmployerHome
+              clearViewing={this.clearViewing}
               currentlyviewing={this.state.currentlyviewing}
               currentprisonSTORE={this.props.currentprisonSTORE}
               getPrisonsWorkers={this.props.getPrisonsWorkers}

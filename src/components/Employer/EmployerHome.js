@@ -17,6 +17,7 @@ class EmployerHome extends React.Component {
             currentlyviewing={this.props.currentlyviewing}
             getPrisonsWorkers={this.props.getPrisonsWorkers}
             prison={this.props.currentprisonSTORE}
+            clearViewing={this.props.clearViewing}
           />
         ) : (
           this.props.prisonsarraySTORE.map(

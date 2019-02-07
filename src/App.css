@@ -58,3 +58,21 @@
 .PrisonDetailsWrapper {
   width: 100%;
 }
+
+.ProfileModal {
+  
+}
+
+.ModalFoot {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ModalImage {
+  width: 200px;
+  height: auto;
+}
+
+.ModalFlex {
+  display: flex
+}
