@@ -16,15 +16,22 @@ import {
   LOGIN_USER_FAILURE,
   LOGOUT_USER,
   PERSIST_LOGIN,
+  ADD_PRISON_START,
+  ADD_PRISON_SUCCESS,
+  ADD_PRISON_FAILURE,
+  GET_PRISONS_START,
+  GET_PRISONS_SUCCESS,
+  GET_PRISONS_FAILURE
 } from "../actions/";
 
 const initialState = {
+  prisonsarray: [],
   linkedworkers: [],
   error: "",
-  userobject: '',
+  userobject: "",
   jwt: "",
   prisonId: "",
-  loggedin: false,
+  loggedin: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -113,17 +120,45 @@ const reducer = (state = initialState, action) => {
     case LOGOUT_USER:
       return {
         ...state,
-        jwt: '',
+        jwt: "",
         prisonId: "",
         loggedin: false
-      }
+      };
     case PERSIST_LOGIN:
       return {
         ...state,
         loggedin: true,
         jwt: action.payload.token,
         prisonId: action.payload.id
+      };
+    case ADD_PRISON_START:
+      return {
+        ...state
+      };
+    case ADD_PRISON_SUCCESS:
+      return {
+        ...state,
+        prisonsarray: [...state.prisonsarray, action.payload]
+      };
+    case ADD_PRISON_FAILURE:
+      return {
+        ...state,
+        error: action.payload
+      };
+case GET_PRISONS_START:
+      return {
+        ...state,
       }
+case GET_PRISONS_SUCCESS:
+      return {
+        ...state,
+        prisonsarray: action.payload
+      }
+  case GET_PRISONS_FAILURE:
+    return {
+      ...state,
+      error: action.payload
+    }    
     default:
       return state;
   }

@@ -7,11 +7,12 @@ import {
   getLinkedWorkers,
   addWorker,
   updateWorker,
-  deleteWorker
+  deleteWorker,
+  addPrison,
+  getPrisons,
 } from "../store/actions";
 import { connect } from "react-redux";
 import Workers from "../components/Admin/Workers";
-
 
 class AdminView extends React.Component {
   constructor(props) {
@@ -20,31 +21,43 @@ class AdminView extends React.Component {
 
   componentDidMount() {
     this.props.getLinkedWorkers(this.props.prisonIdSTORE);
-    ;
   }
-
 
   render() {
     return (
-      <>
-        <WorkersMgmt
-          handleLogOut={this.props.handleLogOut}
-          getLinkedWorkers={this.props.getLinkedWorkers}
-          addWorker={this.props.addWorker}
-          updateWorker={this.props.updateWorker}
-          deleteWorker={this.props.deleteWorker}
-          linkedworkersStore={this.props.linkedworkersStore}
-          error={this.props.errorStore}
-          userobjectSTORE={this.props.userobjectSTORE}
-          prisonIdSTORE={this.props.prisonIdSTORE}
-          jwtSTORE={this.props.jwtSTORE}
-        />
-      </>
+      <div>
+        {this.props.prisonsarrayStore
+          .map(prison => {
+            return prison.id;
+          })
+          .includes(this.props.prisonIdSTORE) ? (
+          <WorkersMgmt
+            handleLogOut={this.props.handleLogOut}
+            getLinkedWorkers={this.props.getLinkedWorkers}
+            addWorker={this.props.addWorker}
+            updateWorker={this.props.updateWorker}
+            deleteWorker={this.props.deleteWorker}
+            linkedworkersStore={this.props.linkedworkersStore}
+            error={this.props.errorStore}
+            userobjectSTORE={this.props.userobjectSTORE}
+            prisonIdSTORE={this.props.prisonIdSTORE}
+            jwtSTORE={this.props.jwtSTORE}
+          />
+        ) : (
+          <PrisonFactory
+            prisonsarrayStore={this.props.prisonsarrayStore}
+            addPrison={this.props.addPrison}
+            jwtSTORE={this.props.jwtSTORE}
+            prisonIdSTORE={this.props.prisonIdSTORE}
+          />
+        )}
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  prisonsarrayStore: state.prisonsarray,
   linkedworkersStore: state.linkedworkers,
   errorStore: state.error,
   userobjectSTORE: state.userobject,
@@ -54,5 +67,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLinkedWorkers, addWorker, updateWorker, deleteWorker }
+  { getLinkedWorkers, addWorker, updateWorker, deleteWorker, addPrison, getPrisons }
 )(AdminView);

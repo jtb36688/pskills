@@ -7,6 +7,7 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
+import { Link } from "react-router-dom"
 
 const Prison = props => {
   return (
@@ -17,7 +18,7 @@ const Prison = props => {
         <CardText>
           Location: {props.location}
         </CardText>
-        <Button className='Purple'>View Workers</Button>
+        <Link to={`/prison/${props.id}`}><Button className='Purple'>View Workers</Button></Link>
       </CardBody>
     </Card>
   );

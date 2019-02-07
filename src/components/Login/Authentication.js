@@ -3,7 +3,7 @@ import {} from "reactstrap";
 import axios from "axios";
 import Register from "./Register";
 import { withRouter, Route } from "react-router-dom";
-import { loginUser, logoutUser, persistLogin } from "../../store/actions/";
+import { loginUser, logoutUser, persistLogin, getPrisons } from "../../store/actions/";
 import { connect } from "react-redux";
 import AdminView from "../../views/AdminView"
 import Login from "./Login"
@@ -72,7 +72,6 @@ const Authentication = AdminView => Login =>
       if (this.props.loggedinSTORE) {
         return (
           <AdminView
-            username={this.state.username}
             handleLogOut={this.handleLogOut}
           />
         );
@@ -87,6 +86,7 @@ const Authentication = AdminView => Login =>
               handleChanges={this.handleChanges}
               submitLogin={this.submitLogin}
               toggleRegister={this.toggleRegister}
+              getPrisons={this.props.getPrisons}
             />
           );
         }
@@ -104,4 +104,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {loginUser, logoutUser, persistLogin})(Authentication(AdminView)(Login));
+export default connect(mapStateToProps, {loginUser, logoutUser, persistLogin, getPrisons})(Authentication(AdminView)(Login));
