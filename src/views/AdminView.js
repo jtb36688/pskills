@@ -19,9 +19,10 @@ class AdminView extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getLinkedWorkers();
+    this.props.getLinkedWorkers(this.props.prisonIdSTORE);
     ;
   }
+
 
   render() {
     return (
@@ -34,6 +35,9 @@ class AdminView extends React.Component {
           deleteWorker={this.props.deleteWorker}
           linkedworkersStore={this.props.linkedworkersStore}
           error={this.props.errorStore}
+          userobjectSTORE={this.props.userobjectSTORE}
+          prisonIdSTORE={this.props.prisonIdSTORE}
+          jwtSTORE={this.props.jwtSTORE}
         />
       </>
     );
@@ -42,7 +46,10 @@ class AdminView extends React.Component {
 
 const mapStateToProps = state => ({
   linkedworkersStore: state.linkedworkers,
-  errorStore: state.error
+  errorStore: state.error,
+  userobjectSTORE: state.userobject,
+  prisonIdSTORE: state.prisonId,
+  jwtSTORE: state.jwt
 });
 
 export default connect(

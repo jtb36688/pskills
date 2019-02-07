@@ -14,11 +14,13 @@ export const DELETE_WORKER_SUCCESS = "DELETE_WORKER_SUCCESS";
 export const DELETE_WORKER_FAILURE = "DELETE_WORKER_FAILURE";
 
 const ServerUrl = "https://prisoner-skills-backend.herokuapp.com/api/prisoners";
+const LinkedProfiles = "https://prisoner-skills-backend.herokuapp.com/api/prisoners/prison"
 
-export const getLinkedWorkers = () => dispatch => {
+export const getLinkedWorkers = (prisonId) => dispatch => {
+  console.log(prisonId)
   dispatch({ type: GET_LINKED_START });
   axios
-    .get(`${ServerUrl}`)
+    .get(`${LinkedProfiles}/${prisonId}`)
     .then(res => {
       dispatch({ type: GET_LINKED_SUCCESS, payload: res.data });
     })
@@ -27,14 +29,14 @@ export const getLinkedWorkers = () => dispatch => {
     });
 };
 
-export const addWorker = workerdata => dispatch => {
+export const addWorker = (workerdata, authToken) => dispatch => {
   dispatch({ type: ADD_WORKER_START });
   axios({
     url: ServerUrl,
     method: "POST",
     data: workerdata,
     headers: {
-      Authorization: localStorage.getItem("jwt")
+      Authorization: authToken
     }
   })
     .then(res => {
@@ -45,14 +47,14 @@ export const addWorker = workerdata => dispatch => {
     });
 };
 
-export const updateWorker = (workerdata, id) => dispatch => {
+export const updateWorker = (workerdata, id, authToken) => dispatch => {
   dispatch({ type: UPDATE_WORKER_START });
   axios({
     url: `${ServerUrl}/${id}`,
     method: "PUT",
     data: workerdata,
     headers: {
-      Authorization: localStorage.getItem("jwt")
+      Authorization: authToken
     }
   })
     .then(res => {
@@ -63,13 +65,13 @@ export const updateWorker = (workerdata, id) => dispatch => {
     });
 };
 
-export const deleteWorker = id => dispatch => {
+export const deleteWorker = (id, authToken) => dispatch => {
   dispatch({ type: DELETE_WORKER_START });
   axios({
     url: `${ServerUrl}/${id}`,
     method: "DELETE",
     headers: {
-      Authorization: localStorage.getItem("jwt")
+      Authorization: authToken
     }
   })
     .then(res => {

@@ -3,9 +3,10 @@ import {} from "reactstrap";
 import axios from "axios";
 import Register from "./Register";
 import { withRouter, Route } from "react-router-dom";
-
-const loginEndpoint =
-  "https://prisoner-skills-backend.herokuapp.com/api/users/login";
+import { loginUser, logoutUser, persistLogin } from "../../store/actions/";
+import { connect } from "react-redux";
+import AdminView from "../../views/AdminView"
+import Login from "./Login"
 
 const Authentication = AdminView => Login =>
   class extends React.Component {
@@ -23,11 +24,12 @@ const Authentication = AdminView => Login =>
 
     componentDidMount() {
       this.authCheck();
-      console.log("Authentication Mounted");
     }
 
+
     authCheck() {
-      localStorage.getItem("jwt") && this.setState({ loggedin: true });
+      console.log('assigning login store')
+      JSON.parse(localStorage.getItem("user")) && this.props.persistLogin(JSON.parse(localStorage.getItem("user")));
     }
 
     handleChanges = e => {
@@ -37,30 +39,6 @@ const Authentication = AdminView => Login =>
           [e.target.name]: e.target.value
         }
       });
-    };
-
-    handleLogOut = () => {
-      window.localStorage.clear();
-      this.setState({
-        loggedin: false,
-        login: {
-          username: "",
-          password: ""
-        }
-      });
-      this.props.history.push("/");
-    };
-
-    retrieveAuth = () => {
-      axios
-        .post(`${loginEndpoint}`, this.state.login)
-        .then(function(response) {
-          localStorage.setItem("jwt", `${response.data.token}`);
-        })
-        .then(() => this.authCheck())
-        .catch(function(error) {
-          alert(error);
-        });
     };
 
     submitLogin = e => {
@@ -74,7 +52,7 @@ const Authentication = AdminView => Login =>
         });
         alert("Invalid login, please enter Username and Password");
       } else {
-        this.retrieveAuth();
+        this.props.loginUser(this.state.login);
       }
     };
 
@@ -84,8 +62,14 @@ const Authentication = AdminView => Login =>
       }));
     };
 
+    handleLogOut = () => {
+      localStorage.clear();
+      this.props.logoutUser();
+
+    }
+
     conditionalRender = () => {
-      if (this.state.loggedin) {
+      if (this.props.loggedinSTORE) {
         return (
           <AdminView
             username={this.state.username}
@@ -114,4 +98,10 @@ const Authentication = AdminView => Login =>
     }
   };
 
-export default Authentication;
+const mapStateToProps = state => ({
+  loggedinSTORE: state.loggedin,
+  errorSTORE: state.error
+});
+
+
+export default connect(mapStateToProps, {loginUser, logoutUser, persistLogin})(Authentication(AdminView)(Login));

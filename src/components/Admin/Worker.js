@@ -43,9 +43,9 @@ class Worker extends React.Component {
     }));
   };
 
-  submitHandler = (e, updatedata, id) => {
+  submitHandler = (e, updatedata, id, authToken) => {
     e.preventDefault();
-    this.props.updateWorker(updatedata, id);
+    this.props.updateWorker(updatedata, id, authToken);
     this.toggleUpdate();
   };
 
@@ -73,7 +73,7 @@ class Worker extends React.Component {
         {this.state.showasform ? (
           <form
             onSubmit={e =>
-              this.submitHandler(e, this.state.updatedata, this.props.worker.id)
+              this.submitHandler(e, this.state.updatedata, this.props.worker.id, this.props.jwtSTORE)
             }
           >
             {this.state.updatedata.name.toUpperCase()}
@@ -132,7 +132,7 @@ class Worker extends React.Component {
               <Button
                 size="sm"
                 className='Purple'
-                onClick={() => this.props.deleteWorker(this.props.worker.id)}
+                onClick={() => this.props.deleteWorker(this.props.worker.id, this.props.jwtSTORE)}
               >
                 {" "}
                 Delete Worker{" "}

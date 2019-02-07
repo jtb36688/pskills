@@ -92,14 +92,13 @@ class App extends React.Component {
             <EmployerView prisonsarray={this.state.prisonsarray} {...props} />
           )}
         />
-        <Route path="/admin/" render={props => <ConditionalView authCheck={this.authCheck} loggedin={this.state.loggedin} {...props} />} />
+        <Route path="/admin/" render={props => <Authentication {...props} />} />
         <Route path="/help/" render={props => <HelpView {...props} />} />
       </div>
     );
   }
 }
 
-const ConditionalView = Authentication(AdminView)(Login);
 const AppWithRouter = withRouter(App)
 
 ReactDOM.render(
