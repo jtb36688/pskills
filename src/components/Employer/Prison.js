@@ -7,19 +7,23 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Prison = props => {
   return (
-    <Card className='PrisonCard'>
-      <CardBody>
-        <CardTitle>{props.name}</CardTitle>
-        <CardSubtitle>Available Workers:{props.workerscount}</CardSubtitle>
-        <CardText>
-          Location: {props.location}
-        </CardText>
-        <Link to={`/prison/${props.id}`}><Button className='Purple'>View Workers</Button></Link>
-      </CardBody>
+    <Card className="PrisonCard">
+      {props.viewingprison ? (
+        <div>{props.id}</div>
+      ) : (
+        <CardBody>
+          <CardTitle>{props.name}</CardTitle>
+          <CardSubtitle>Available Workers:{props.workerscount}</CardSubtitle>
+          <CardText>Location: {props.location}</CardText>
+          <Button onClick={() => props.toggleViewing(props.id)} className="Purple">
+            View Workers
+          </Button>
+        </CardBody>
+      )}
     </Card>
   );
 };

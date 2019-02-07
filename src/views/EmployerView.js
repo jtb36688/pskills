@@ -2,14 +2,25 @@ import React from "react";
 import EmployerHome from "../components/Employer/EmployerHome";
 import {} from "reactstrap";
 import { connect } from "react-redux";
-import { getPrisons } from "../store/actions";
+import { getPrisons, getPrisonsWorkers } from "../store/actions";
 import { Route } from "react-router-dom";
-import ProfilesList from "../components/Employer/ProfilesList";
 
 class EmployerView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      viewingprison: false,
+      currentlyviewing: ""
+    };
   }
+
+  toggleViewing = id => {
+    console.log("toggling view", this.state);
+    this.setState(currentState => ({
+      viewingprison: !currentState.viewingprison,
+      currentlyviewing: id
+    }));
+  };
 
   componentDidMount() {
     console.log("EmployerView Mounted");
@@ -22,12 +33,15 @@ class EmployerView extends React.Component {
           exact
           path="/"
           render={props => (
-            <EmployerHome prisonsarraySTORE={this.props.prisonsarraySTORE} />
+            <EmployerHome
+              currentlyviewing={this.state.currentlyviewing}
+              currentprisonSTORE={this.props.currentprisonSTORE}
+              getPrisonsWorkers={this.props.getPrisonsWorkers}
+              viewingprison={this.state.viewingprison}
+              toggleViewing={this.toggleViewing}
+              prisonsarraySTORE={this.props.prisonsarraySTORE}
+            />
           )}
-        />
-        <Route
-          path={"/prisons/:PrisonId"}
-          render={props => <ProfilesList {...props} />}
         />
       </div>
     );
@@ -35,10 +49,13 @@ class EmployerView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  prisonsarraySTORE: state.prisonsarray
+  prisonsarraySTORE: state.prisonsarray,
+  currentprisonSTORE: state.currentprison
 });
 
-export default connect(
+const connectEmployerview = connect(
   mapStateToProps,
-  { getPrisons }
+  { getPrisons, getPrisonsWorkers }
 )(EmployerView);
+
+export default connectEmployerview;

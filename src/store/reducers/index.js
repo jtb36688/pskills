@@ -21,12 +21,16 @@ import {
   ADD_PRISON_FAILURE,
   GET_PRISONS_START,
   GET_PRISONS_SUCCESS,
-  GET_PRISONS_FAILURE
+  GET_PRISONS_FAILURE,
+  GET_WORKERS_START,
+  GET_WORKERS_SUCCESS,
+  GET_WORKERS_FAILURE
 } from "../actions/";
 
 const initialState = {
   prisonsarray: [],
   linkedworkers: [],
+  currentprison: {},
   error: "",
   userobject: "",
   jwt: "",
@@ -158,7 +162,21 @@ case GET_PRISONS_SUCCESS:
     return {
       ...state,
       error: action.payload
-    }    
+    }
+    case GET_WORKERS_START:
+    return {
+      ...state,
+    }
+    case GET_WORKERS_SUCCESS:
+    return {
+      ...state,
+      currentprison: action.payload
+    }
+    case GET_WORKERS_FAILURE:
+    return {
+      ...state,
+      error: action.payload
+    }
     default:
       return state;
   }
