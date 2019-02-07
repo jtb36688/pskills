@@ -1,6 +1,7 @@
 import React from "react";
 import EmployerHome from "../components/Employer/EmployerHome";
 import {} from "reactstrap";
+import Loader from "react-loader-spinner"
 import { connect } from "react-redux";
 import { getPrisons, getPrisonsWorkers } from "../store/actions";
 import { Route } from "react-router-dom";

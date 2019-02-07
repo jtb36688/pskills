@@ -1,6 +1,8 @@
 import React from "react";
 import Prison from "./Prison";
 import ProfilesList from "./ProfilesList";
+import Loader from "react-loader-spinner"
+
 
 class EmployerHome extends React.Component {
   constructor(props) {
