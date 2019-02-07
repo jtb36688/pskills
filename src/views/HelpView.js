@@ -7,10 +7,6 @@ class HelpView extends React.Component {
         super(props)
     }
 
-    componentDidMount() {
-        console.log ('HelpView Mounted')
-    }
-
     render() {
         return (
             "Hello World!"

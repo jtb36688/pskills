@@ -18,10 +18,6 @@ class Worker extends React.Component {
     this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
-  componentDidMount() {
-    console.log('workerdata', this.props.worker.availability)
-  }
-
   toggleUpdate = workerdata => {
     if (this.state.showasform) {
       this.setState({

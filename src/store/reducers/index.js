@@ -35,18 +35,23 @@ const initialState = {
   userobject: "",
   jwt: "",
   prisonId: "",
-  loggedin: false
+  loggedin: false,
+  isLoading: false,
+  gpLoading: false,
+  gwLoading: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LINKED_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case GET_LINKED_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         linkedworkers: action.payload.map(prisoner => {
           if (prisoner.availability === 0) {
             return { ...prisoner, availability: false };
@@ -60,57 +65,69 @@ const reducer = (state = initialState, action) => {
     case GET_LINKED_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case ADD_WORKER_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case ADD_WORKER_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         linkedworkers: action.payload
       };
     case ADD_WORKER_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case UPDATE_WORKER_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case UPDATE_WORKER_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         linkedworkers: action.payload
       };
     case UPDATE_WORKER_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case DELETE_WORKER_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case DELETE_WORKER_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         linkedworkers: action.payload
       };
     case DELETE_WORKER_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case LOGIN_USER_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case LOGIN_USER_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         userobject: action.payload,
         jwt: action.payload.token,
         prisonId: action.payload.id,
@@ -119,6 +136,7 @@ const reducer = (state = initialState, action) => {
     case LOGIN_USER_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
     case LOGOUT_USER:
@@ -137,46 +155,55 @@ const reducer = (state = initialState, action) => {
       };
     case ADD_PRISON_START:
       return {
-        ...state
+        ...state,
+        isLoading: true
       };
     case ADD_PRISON_SUCCESS:
       return {
         ...state,
+        isLoading: false,
         prisonsarray: [...state.prisonsarray, action.payload]
       };
     case ADD_PRISON_FAILURE:
       return {
         ...state,
+        isLoading: false,
         error: action.payload
       };
-case GET_PRISONS_START:
+    case GET_PRISONS_START:
       return {
         ...state,
-      }
-case GET_PRISONS_SUCCESS:
+        gpLoading: true
+      };
+    case GET_PRISONS_SUCCESS:
       return {
         ...state,
+        gpLoading: false,
         prisonsarray: action.payload
-      }
-  case GET_PRISONS_FAILURE:
-    return {
-      ...state,
-      error: action.payload
-    }
+      };
+    case GET_PRISONS_FAILURE:
+      return {
+        ...state,
+        gpLoading: false,
+        error: action.payload
+      };
     case GET_WORKERS_START:
-    return {
-      ...state,
-    }
+      return {
+        ...state,
+        gwLoading: true
+      };
     case GET_WORKERS_SUCCESS:
-    return {
-      ...state,
-      currentprison: action.payload
-    }
+      return {
+        ...state,
+        gwLoading: false,
+        currentprison: action.payload
+      };
     case GET_WORKERS_FAILURE:
-    return {
-      ...state,
-      error: action.payload
-    }
+      return {
+        ...state,
+        gwLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

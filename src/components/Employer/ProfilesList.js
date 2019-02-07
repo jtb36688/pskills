@@ -1,6 +1,7 @@
 import React from "react";
 import {} from "reactstrap";
 import Prison from "./Prison";
+import Loader from "react-loader-spinner";
 import {
   Jumbotron,
   Container,
@@ -23,7 +24,6 @@ class ProfilesList extends React.Component {
 
   componentDidMount() {
     this.props.getPrisonsWorkers(this.props.currentlyviewing);
-    console.log("prisoners", this.props.prison.name);
   }
 
   viewprisoner = id => {
@@ -142,6 +142,9 @@ class ProfilesList extends React.Component {
             <p>Phone Number: {this.props.prison.phoneNumber}</p>
           </Container>
         </Jumbotron>
+        {this.props.gwLoading ? (
+            <Loader type="TailSpin" color="#2a4a45" height="30%" width="20%" />
+        ) : (
         <Table>
           <thead>
             <tr>
@@ -153,6 +156,7 @@ class ProfilesList extends React.Component {
           </thead>
           <tbody>{this.conditionalRender()}</tbody>
         </Table>
+        )}
         {this.conditionalModal()}
       </div>
     );

@@ -20,11 +20,9 @@ class EmployerView extends React.Component {
       viewingprison: false,
       currentlyviewing: ""
     })
-    console.log("clearing view", this.state)
   }
 
   toggleViewing = id => {
-    console.log("toggling view", this.state);
     this.setState(currentState => ({
       viewingprison: !currentState.viewingprison,
       currentlyviewing: id
@@ -32,7 +30,6 @@ class EmployerView extends React.Component {
   };
 
   componentDidMount() {
-    console.log("EmployerView Mounted");
     this.props.getPrisons();
   }
   render() {
@@ -50,6 +47,8 @@ class EmployerView extends React.Component {
               viewingprison={this.state.viewingprison}
               toggleViewing={this.toggleViewing}
               prisonsarraySTORE={this.props.prisonsarraySTORE}
+              gpLoading={this.props.gpLoading}
+              gwLoading={this.props.gwLoading}
             />
           )}
         />
@@ -60,7 +59,9 @@ class EmployerView extends React.Component {
 
 const mapStateToProps = state => ({
   prisonsarraySTORE: state.prisonsarray,
-  currentprisonSTORE: state.currentprison
+  currentprisonSTORE: state.currentprison,
+  gpLoading: state.gpLoading,
+  gwLoading: state.gwLoading
 });
 
 const connectEmployerview = connect(
