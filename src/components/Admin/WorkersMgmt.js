@@ -28,7 +28,7 @@ class WorkersMgmt extends React.Component {
   }
 
   componentDidMount() {
-    localStorage.setItem("user", JSON.stringify(this.props.userobjectSTORE));
+    (localStorage.getItem("user") === "\"\"" || !localStorage.getItem("user"))  && localStorage.setItem("user", JSON.stringify(this.props.userobjectSTORE));
   }
 
   toggleDropDown = () =>
