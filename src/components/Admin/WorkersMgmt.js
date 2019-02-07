@@ -10,8 +10,9 @@ import {
   Input,
   Button
 } from "reactstrap";
+import Workers from "./Workers"
 
-class AdminHome extends React.Component {
+class WorkersMgmt extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,6 +79,7 @@ class AdminHome extends React.Component {
 
   render() {
     return (
+      <div className='WorkersMgmtWrapper'>
       <form
         className="WorkerFormWrapper"
         onSubmit={e => this.handleSubmit(e, this.state.newworker)}
@@ -131,8 +133,15 @@ class AdminHome extends React.Component {
           Add Worker
         </Button>
       </form>
+      <Workers
+        updateWorker={this.props.updateWorker}
+          deleteWorker={this.props.deleteWorker}
+          linkedworkersStore={this.props.linkedworkersStore}
+          error={this.props.errorStore}
+        />
+        </div>
     );
   }
 }
 
-export default AdminHome;
+export default WorkersMgmt;

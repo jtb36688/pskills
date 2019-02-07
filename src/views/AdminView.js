@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import {} from "reactstrap";
-import AdminHome from "../components/Admin/AdminHome";
+import WorkersMgmt from "../components/Admin/WorkersMgmt";
 import PrisonFactory from "../components/Admin/PrisonFactory";
 import {
   getLinkedWorkers,
@@ -26,13 +26,11 @@ class AdminView extends React.Component {
   render() {
     return (
       <>
-        <AdminHome
+        <WorkersMgmt
           handleLogOut={this.props.handleLogOut}
           getLinkedWorkers={this.props.getLinkedWorkers}
           addWorker={this.props.addWorker}
-        />
-        <Workers
-        updateWorker={this.props.updateWorker}
+          updateWorker={this.props.updateWorker}
           deleteWorker={this.props.deleteWorker}
           linkedworkersStore={this.props.linkedworkersStore}
           error={this.props.errorStore}

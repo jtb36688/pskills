@@ -22,12 +22,20 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LINKED_START:
       return {
-        ...state,
+        ...state
       };
     case GET_LINKED_SUCCESS:
       return {
         ...state,
-        linkedworkers: action.payload
+        linkedworkers: action.payload.map(prisoner => {
+          if (prisoner.availability === 0) {
+            return { ...prisoner, availability: false };
+          } else if (prisoner.availability === 1) {
+            return { ...prisoner, availability: true };
+          } else {
+            return prisoner;
+          }
+        })
       };
     case GET_LINKED_FAILURE:
       return {
@@ -36,7 +44,7 @@ const reducer = (state = initialState, action) => {
       };
     case ADD_WORKER_START:
       return {
-        ...state,
+        ...state
       };
     case ADD_WORKER_SUCCESS:
       return {
@@ -50,7 +58,7 @@ const reducer = (state = initialState, action) => {
       };
     case UPDATE_WORKER_START:
       return {
-        ...state,
+        ...state
       };
     case UPDATE_WORKER_SUCCESS:
       return {
@@ -64,7 +72,7 @@ const reducer = (state = initialState, action) => {
       };
     case DELETE_WORKER_START:
       return {
-        ...state,
+        ...state
       };
     case DELETE_WORKER_SUCCESS:
       return {
