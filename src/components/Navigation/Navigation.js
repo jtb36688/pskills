@@ -6,9 +6,6 @@ const Navigation = () => {
     return (
       <div className="MainNav">
         <Link  to="/">
-          HOME
-        </Link>
-        <Link  to="/employers/">
           FIND WORKERS
         </Link>
         <Link  to="/admin/">

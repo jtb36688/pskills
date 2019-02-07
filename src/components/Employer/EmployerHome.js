@@ -1,5 +1,4 @@
 import React from "react";
-
 import Prison from "./Prison";
 
 class EmployerHome extends React.Component {
@@ -9,9 +8,10 @@ class EmployerHome extends React.Component {
   render() {
     return (
       <div className="PrisonListWrapper">
-        {this.props.prisonsarray.map(({ name, location, workerscount, id }) => (
+        {this.props.prisonsarraySTORE.map(({ name, location, workerscount, id }) => (
           <Prison
             key={id}
+            id={id}
             name={name}
             location={location}
             workerscount={workerscount}

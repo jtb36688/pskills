@@ -1,8 +1,12 @@
 import React from "react";
 import {} from "reactstrap";
 import axios from "axios";
-
-const loginEndpoint = "http://localhost:5000/";
+import Register from "./Register";
+import { withRouter, Route } from "react-router-dom";
+import { loginUser, logoutUser, persistLogin, getPrisons } from "../../store/actions/";
+import { connect } from "react-redux";
+import AdminView from "../../views/AdminView"
+import Login from "./Login"
 
 const Authentication = AdminView => Login =>
   class extends React.Component {
@@ -10,6 +14,7 @@ const Authentication = AdminView => Login =>
       super(props);
       this.state = {
         loggedin: false,
+        registering: false,
         login: {
           username: "",
           password: ""
@@ -18,29 +23,27 @@ const Authentication = AdminView => Login =>
     }
 
     componentDidMount() {
-      console.log("Authentication Mounted");
+      this.authCheck();
+    }
+
+
+    authCheck() {
+      console.log('assigning login store')
+      JSON.parse(localStorage.getItem("user")) && this.props.persistLogin(JSON.parse(localStorage.getItem("user")));
     }
 
     handleChanges = e => {
-      this.setState({ [e.target.name]: e.target.value });
-    };
-
-    retrieveAuth = () => {
-      console.log("authrequest");
-      axios
-        .post(`${loginEndpoint}`, this.state.login)
-        .then(function(response) {
-          console.log(`${response.data.token}`);
-          localStorage.setItem("jwt", `${response.data.token}`);
-        })
-        .catch(function(error) {
-          alert(error.response.data.error);
-        });
+      this.setState({
+        login: {
+          ...this.state.login,
+          [e.target.name]: e.target.value
+        }
+      });
     };
 
     submitLogin = e => {
       e.preventDefault();
-      if (!this.state.username || !this.state.password) {
+      if (!this.state.login.username || !this.state.login.password) {
         this.setState({
           login: {
             username: "",
@@ -49,38 +52,44 @@ const Authentication = AdminView => Login =>
         });
         alert("Invalid login, please enter Username and Password");
       } else {
-        this.retrieveAuth();
-        this.setState({ loggedin: true });
+        this.props.loginUser(this.state.login);
       }
     };
 
-    handleLogOut = () => {
-      this.setState({
-        loggedin: false,
-        login: {
-          username: "",
-          password: ""
-        }
-      });
+    toggleRegister = () => {
+      this.setState(currentState => ({
+        registering: !currentState.registering
+      }));
     };
 
+    handleLogOut = () => {
+      localStorage.clear();
+      this.props.logoutUser();
+
+    }
+
     conditionalRender = () => {
-      if (this.state.loggedin) {
+      if (this.props.loggedinSTORE) {
         return (
           <AdminView
-            username={this.state.username}
             handleLogOut={this.handleLogOut}
           />
         );
       } else {
-        return (
-          <Login
-            password={this.state.password}
-            username={this.state.username}
-            handleChanges={this.handleChanges}
-            submitLogin={this.submitLogin}
-          />
-        );
+        if (this.state.registering) {
+          return <Register toggleRegister={this.toggleRegister} />;
+        } else {
+          return (
+            <Login
+              password={this.state.login.password}
+              username={this.state.login.username}
+              handleChanges={this.handleChanges}
+              submitLogin={this.submitLogin}
+              toggleRegister={this.toggleRegister}
+              getPrisons={this.props.getPrisons}
+            />
+          );
+        }
       }
     };
 
@@ -89,4 +98,10 @@ const Authentication = AdminView => Login =>
     }
   };
 
-export default Authentication;
+const mapStateToProps = state => ({
+  loggedinSTORE: state.loggedin,
+  errorSTORE: state.error
+});
+
+
+export default connect(mapStateToProps, {loginUser, logoutUser, persistLogin, getPrisons})(Authentication(AdminView)(Login));

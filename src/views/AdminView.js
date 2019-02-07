@@ -1,91 +1,71 @@
 import React from "react";
 import axios from "axios";
 import {} from "reactstrap";
-import AdminHome from "../components/Admin/AdminHome";
+import WorkersMgmt from "../components/Admin/WorkersMgmt";
 import PrisonFactory from "../components/Admin/PrisonFactory";
 import {
   getLinkedWorkers,
   addWorker,
   updateWorker,
-  deleteWorker
+  deleteWorker,
+  addPrison,
+  getPrisons,
 } from "../store/actions";
 import { connect } from "react-redux";
 import Workers from "../components/Admin/Workers";
 
-const loginobject = {
-  username: "jacob",
-  password: "bryan"
-};
-
 class AdminView extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
   }
 
   componentDidMount() {
-    this.retrieveAuth();
-    this.props.getLinkedWorkers();
-    ;
+    this.props.getLinkedWorkers(this.props.prisonIdSTORE);
   }
-s
-
-  retrieveAuth = () => {
-    console.log("authrequest")
-    axios
-      .post(
-        `https://prisoner-skills-backend.herokuapp.com/api/users/login`,
-        loginobject
-      )
-      .then(function(response) {       
-        console.log(`${response.data.token}`)
-        localStorage.setItem('jwt', `${response.data.token}`)
-      })
-      .catch(function(error) {
-        alert(error.response.data.error);;
-      });
-  };
-
-  initiateUpdate = id => {
-    this.setState({
-      updatingId: `${id}`
-    });
-  };
-
-  // initiateUpdate and updatingId will probably be removed/replaced, i'm not updating from forms
 
   render() {
     return (
-      <>
-        <AdminHome
-          getLinkedWorkers={this.props.getLinkedWorkers}
-          addWorker={this.props.addWorker}
-        />
-        <Workers
-        updateWorker={this.props.updateWorker}
-          deleteWorker={this.props.deleteWorker}
-          linkedworkersStore={this.props.linkedworkersStore}
-          initiateUpdate={this.initiateUpdate}
-          error={this.props.errorStore}
-        />
-      </>
+      <div>
+        {this.props.prisonsarrayStore
+          .map(prison => {
+            return prison.id;
+          })
+          .includes(this.props.prisonIdSTORE) ? (
+          <WorkersMgmt
+            handleLogOut={this.props.handleLogOut}
+            getLinkedWorkers={this.props.getLinkedWorkers}
+            addWorker={this.props.addWorker}
+            updateWorker={this.props.updateWorker}
+            deleteWorker={this.props.deleteWorker}
+            linkedworkersStore={this.props.linkedworkersStore}
+            error={this.props.errorStore}
+            userobjectSTORE={this.props.userobjectSTORE}
+            prisonIdSTORE={this.props.prisonIdSTORE}
+            jwtSTORE={this.props.jwtSTORE}
+          />
+        ) : (
+          <PrisonFactory
+            prisonsarrayStore={this.props.prisonsarrayStore}
+            addPrison={this.props.addPrison}
+            jwtSTORE={this.props.jwtSTORE}
+            prisonIdSTORE={this.props.prisonIdSTORE}
+          />
+        )}
+      </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  prisonsarrayStore: state.prisonsarray,
   linkedworkersStore: state.linkedworkers,
-  errorStore: state.error
+  errorStore: state.error,
+  userobjectSTORE: state.userobject,
+  prisonIdSTORE: state.prisonId,
+  jwtSTORE: state.jwt
 });
 
 export default connect(
   mapStateToProps,
-  { getLinkedWorkers, addWorker, updateWorker, deleteWorker }
+  { getLinkedWorkers, addWorker, updateWorker, deleteWorker, addPrison, getPrisons }
 )(AdminView);
-
-// {this.props.prisonsarrayadminsvalues.includes(this.props.username) ? (
-//   <AdminHome username={this.props.username} />
-// ) : (
-//   <PrisonFactory username={this.props.username} />
-// )}

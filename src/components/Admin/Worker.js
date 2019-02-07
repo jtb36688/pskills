@@ -13,8 +13,13 @@ class Worker extends React.Component {
     super(props);
     this.state = {
       showasform: false,
-      updatedata: null
+      updatedata: null,
     };
+    this.handleCheckbox = this.handleCheckbox.bind(this)
+  }
+
+  componentDidMount() {
+    console.log('workerdata', this.props.worker.availability)
   }
 
   toggleUpdate = workerdata => {
@@ -38,9 +43,9 @@ class Worker extends React.Component {
     }));
   };
 
-  submitHandler = (e, updatedata, id) => {
+  submitHandler = (e, updatedata, id, authToken) => {
     e.preventDefault();
-    this.props.updateWorker(updatedata, id);
+    this.props.updateWorker(updatedata, id, authToken);
     this.toggleUpdate();
   };
 
@@ -53,13 +58,22 @@ class Worker extends React.Component {
     });
   };
 
+  handleCheckbox = (e) => {
+    this.setState({
+        updatedata: {
+          ...this.state.updatedata,
+          availability: e.target.checked
+        }
+    })
+  }
+
   render() {
     return (
       <div>
         {this.state.showasform ? (
           <form
             onSubmit={e =>
-              this.submitHandler(e, this.state.updatedata, this.props.worker.id)
+              this.submitHandler(e, this.state.updatedata, this.props.worker.id, this.props.jwtSTORE)
             }
           >
             {this.state.updatedata.name.toUpperCase()}
@@ -86,11 +100,10 @@ class Worker extends React.Component {
                 <InputGroupText>
                   AVAILABLE FOR WORK LEAVE
                   <Input
-                    value={this.state.updatedata.availability}
+                    checked={this.state.updatedata.availability}
                     addon
                     type="checkbox"
-                    name="availability"
-                    onChange={this.handleChanges}
+                    onClick={this.handleCheckbox}
                   />
                 </InputGroupText>
               </InputGroupAddon>
@@ -110,7 +123,7 @@ class Worker extends React.Component {
           <tr className="TableRow">
             <th className="text" scope="row">{this.props.worker.id}</th>
             <td className="text">{this.props.worker.name}</td>
-            <td className="text">{this.props.worker.availability}</td>
+            <td className="text">{this.props.worker.availability ? `Work Leave Available` : `No Work Leave`}</td>
             <td className="text">{this.props.worker.skills}</td>
           </tr>
             </tbody>
@@ -119,7 +132,7 @@ class Worker extends React.Component {
               <Button
                 size="sm"
                 className='Purple'
-                onClick={() => this.props.deleteWorker(this.props.worker.id)}
+                onClick={() => this.props.deleteWorker(this.props.worker.id, this.props.jwtSTORE)}
               >
                 {" "}
                 Delete Worker{" "}
@@ -142,7 +155,3 @@ class Worker extends React.Component {
 }
 
 export default Worker;
-
-// updatedata: this.props.updatesarray.find(function(prisonerobject) {
-//     return prisonerobject.id === this.props.worker.id;
-//   }, this)
