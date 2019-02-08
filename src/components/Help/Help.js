@@ -7,7 +7,7 @@ const Help = props => {
       <Jumbotron>
         <h1 className="display-3">Prison Skills Inc.</h1>
         <p className="lead">
-          Prison Skils is here to help. Please contact us at: (888) 000-1231
+          Prison Skills is here to help. Please contact us at: (888) 000-1231
         </p>
         <hr className="my-2" />
         <p>

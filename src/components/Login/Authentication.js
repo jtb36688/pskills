@@ -3,10 +3,17 @@ import {} from "reactstrap";
 import axios from "axios";
 import Register from "./Register";
 import { withRouter, Route } from "react-router-dom";
-import { loginUser, logoutUser, persistLogin, getPrisons } from "../../store/actions/";
+import {
+  dismissLoginError,
+  loginUser,
+  logoutUser,
+  persistLogin,
+  getPrisons
+} from "../../store/actions/";
 import { connect } from "react-redux";
-import AdminView from "../../views/AdminView"
-import Login from "./Login"
+import AdminView from "../../views/AdminView";
+import Login from "./Login";
+import { Alert } from "reactstrap";
 
 const Authentication = AdminView => Login =>
   class extends React.Component {
@@ -26,9 +33,9 @@ const Authentication = AdminView => Login =>
       this.authCheck();
     }
 
-
     authCheck() {
-      JSON.parse(localStorage.getItem("user")) && this.props.persistLogin(JSON.parse(localStorage.getItem("user")));
+      JSON.parse(localStorage.getItem("user")) &&
+        this.props.persistLogin(JSON.parse(localStorage.getItem("user")));
     }
 
     handleChanges = e => {
@@ -38,6 +45,11 @@ const Authentication = AdminView => Login =>
           [e.target.name]: e.target.value
         }
       });
+    };
+
+    onDismiss = () => {
+      this.setState({ login: "", password: "" });
+      this.props.dismissLoginError();
     };
 
     submitLogin = e => {
@@ -64,16 +76,11 @@ const Authentication = AdminView => Login =>
     handleLogOut = () => {
       localStorage.clear();
       this.props.logoutUser();
-
-    }
+    };
 
     conditionalRender = () => {
       if (this.props.loggedinSTORE) {
-        return (
-          <AdminView
-            handleLogOut={this.handleLogOut}
-          />
-        );
+        return <AdminView handleLogOut={this.handleLogOut} />;
       } else {
         if (this.state.registering) {
           return <Register toggleRegister={this.toggleRegister} />;
@@ -93,14 +100,23 @@ const Authentication = AdminView => Login =>
     };
 
     render() {
-      return this.conditionalRender();
+      return this.props.loginerror ? (
+        <Alert  className="LoginError" color="dark" isOpen={this.state.visible} toggle={this.onDismiss}>
+          {this.props.loginerror}
+        </Alert>
+      ) : (
+        this.conditionalRender()
+      );
     }
   };
 
 const mapStateToProps = state => ({
   loggedinSTORE: state.loggedin,
-  errorSTORE: state.error
+  errorSTORE: state.error,
+  loginerror: state.loginerror
 });
 
-
-export default connect(mapStateToProps, {loginUser, logoutUser, persistLogin, getPrisons})(Authentication(AdminView)(Login));
+export default connect(
+  mapStateToProps,
+  { loginUser, logoutUser, persistLogin, getPrisons, dismissLoginError }
+)(Authentication(AdminView)(Login));

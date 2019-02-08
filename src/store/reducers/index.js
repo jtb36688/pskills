@@ -24,7 +24,8 @@ import {
   GET_PRISONS_FAILURE,
   GET_WORKERS_START,
   GET_WORKERS_SUCCESS,
-  GET_WORKERS_FAILURE
+  GET_WORKERS_FAILURE,
+  DISMISS_LOGIN_ERROR
 } from "../actions/";
 
 const initialState = {
@@ -32,6 +33,7 @@ const initialState = {
   linkedworkers: [],
   currentprison: {},
   error: "",
+  loginerror: "",
   userobject: "",
   jwt: "",
   prisonId: "",
@@ -137,7 +139,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload
+        loginerror: action.payload
       };
     case LOGOUT_USER:
       return {
@@ -203,6 +205,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         gwLoading: false,
         error: action.payload
+      };
+    case DISMISS_LOGIN_ERROR:
+      return {
+        ...state,
+        loginerror: ""
       };
     default:
       return state;
