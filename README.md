@@ -1,83 +1,19 @@
-Marketing - Employer Home - Admin Home - Contact/Help
+Prisoner Skills
 
-Marketing SubTabs - Marketing Home (About us)
+A web app designed to place employers in contact with skilled workers who are currently serving prison sentences.
 
-Employer Home Subtabs - View Workers By Facility (DEFAULT) - OPTIONAL: View Workers By Skill - OPTIONAL: View Saved Workers
-Admin SubTabs - First login - Make prison, or list prisons if you have them - Admin Home (Default) - Add New Profile - Add New Prison -
-Contact/Help SubTabs - Contact Info - OPTIONAL: How to use our services
+Deployed at:
+https://lambda-prisoner-skills.herokuapp.com/
 
-Par system indicates proficiency - Explained in our 
-How to Use section.
+Landing pages:
+Jacob McFaul: https://nostalgic-wilson-aa9ec9.netlify.com/
+Isaac Houle: https://amazing-wozniak-539f92.netlify.com/
+Zechariah Drinkhall: https://priceless-lewin-ca2764.netlify.com/
 
-Data Structure Prototype-------------------------------------
 
-const prisonsArray = [
-  ...prisonsarray,
-  {
-    name: "",
-    location: "",
-    adminusers: [],
-    workerscount: 0,
-    workersarray: [
-      ...workersarray,
-      {
-        name: "",
-        workleave: false,
-        skills: [],
-        resume: ""
-      }
-    ]
-  }
-];
-
-Common Occupations-------------------------
-
-Business -
-Bookkeeping
-Other Business
-
-Cleaning -
-Groundskeeping/Landscaping
-Building Cleaner
-Pest Control
-Other Cleaning
-
-Community - 
-Mental Health Worker
-Food Preperation/Chef
-Teacher
-Special Education Teacher
-Hairstylist/Barber
-Other Community
-
-Construction/Trade
-Carpenter/Woodworking
-Drywall/Ceiling
-Electrician
-Elevator Repair
-Flooring Installer
-Insulation Worker
-Brick Layer/Masonry Worker
-Painter
-Plumber
-Roofer
-Heavy Equipment Operator
-Metalworker/Welding
-
-Engineering -
-Architecture
-Drafting
-Other Engineering
-
-Farming/Forestry -
-Agricultural Worker
-Logging Worker
-Other Farming/Forestry
-
-Technology -
-Call Center Representative
-Graphic Design
-Other Technology
+Frontend built by Jacob Bryan
+Backend built by Daren Larson
+Landing pages built by Zechariah Drinkhall, Isaac Houle, and Jacob McFaul
 
 MVP Features Breakdown:
 
@@ -100,24 +36,3 @@ This app contains two user types. A prison admin (who has the ability to log in)
     Navigation - Navigation is present on all pages, Users should know what page is active by clicking on a nav link and activating their tab.
 
 Stretch Goal: A single user could search for prisons by entering their zip code and defining a search radius. An admin can upload a pdf of a prisoner’s resume. A single user can click a contact us form to inquire about a prisoner.
-
-Complementary Colors ------
-#2a2f4a blue
-#2a4a45 green
-#372a4a purple
-
-
-Project Checklist ------
-
-- Pair Program with UI and Back-End Architect
-- Clear, clean file structure
-- Incorporate Redux
-- Seemless integration of UI Static Landing Page
-- Fully Functional SPA Using React Router
-- All of CRUD present
-
-Monday Zoom Checklist -----
-- Build your own Github Organization and add Team Members there ALL MEMBERS of your team INCLUDING PMS need to have access to your orgs.
-- All Project's file structures scaffolded and project architecture decided. 
-- Find a template from a site like HTML5 Up and use that templates color scheme/design flow for your app. 
-
