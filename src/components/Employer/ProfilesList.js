@@ -115,7 +115,7 @@ class ProfilesList extends React.Component {
           <ModalFooter className="ModalFoot">
             Available for Work Leave:{" "}
             {this.parseAvailability(
-              this.parsebyID(this.state.viewid).avaiability
+              this.parsebyID(this.state.viewid).availability
             )}
             <Button color="secondary" onClick={this.toggleModal}>
               Go Back
