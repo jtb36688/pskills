@@ -6,6 +6,7 @@ Deployed at:
 https://lambda-prisoner-skills.herokuapp.com/
 
 Landing pages:
+
 Jacob McFaul: https://nostalgic-wilson-aa9ec9.netlify.com/
 
 Isaac Houle: https://amazing-wozniak-539f92.netlify.com/
@@ -14,8 +15,11 @@ Zechariah Drinkhall: https://priceless-lewin-ca2764.netlify.com/
 
 
 Frontend built by Jacob Bryan
+
 Backend built by Daren Larson
+
 Landing pages built by Zechariah Drinkhall, Isaac Houle, and Jacob McFaul
+
 
 MVP Features Breakdown:
 
