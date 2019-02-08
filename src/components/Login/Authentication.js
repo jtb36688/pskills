@@ -28,7 +28,6 @@ const Authentication = AdminView => Login =>
 
 
     authCheck() {
-      console.log('assigning login store')
       JSON.parse(localStorage.getItem("user")) && this.props.persistLogin(JSON.parse(localStorage.getItem("user")));
     }
 

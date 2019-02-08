@@ -49,6 +49,7 @@ class AdminView extends React.Component {
             addPrison={this.props.addPrison}
             jwtSTORE={this.props.jwtSTORE}
             prisonIdSTORE={this.props.prisonIdSTORE}
+            gpLoading={this.props.gpLoading}
           />
         )}
       </div>
@@ -62,7 +63,8 @@ const mapStateToProps = state => ({
   errorStore: state.error,
   userobjectSTORE: state.userobject,
   prisonIdSTORE: state.prisonId,
-  jwtSTORE: state.jwt
+  jwtSTORE: state.jwt,
+  gpLoading: state.gpLoading
 });
 
 export default connect(

@@ -1,18 +1,35 @@
 import React from "react";
 import EmployerHome from "../components/Employer/EmployerHome";
 import {} from "reactstrap";
+import Loader from "react-loader-spinner"
 import { connect } from "react-redux";
-import { getPrisons } from "../store/actions";
+import { getPrisons, getPrisonsWorkers } from "../store/actions";
 import { Route } from "react-router-dom";
-import ProfilesList from "../components/Employer/ProfilesList";
 
 class EmployerView extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      viewingprison: false,
+      currentlyviewing: ""
+    };
   }
 
+  clearViewing = () => {
+    this.setState({
+      viewingprison: false,
+      currentlyviewing: ""
+    })
+  }
+
+  toggleViewing = id => {
+    this.setState(currentState => ({
+      viewingprison: !currentState.viewingprison,
+      currentlyviewing: id
+    }));
+  };
+
   componentDidMount() {
-    console.log("EmployerView Mounted");
     this.props.getPrisons();
   }
   render() {
@@ -22,12 +39,18 @@ class EmployerView extends React.Component {
           exact
           path="/"
           render={props => (
-            <EmployerHome prisonsarraySTORE={this.props.prisonsarraySTORE} />
+            <EmployerHome
+              clearViewing={this.clearViewing}
+              currentlyviewing={this.state.currentlyviewing}
+              currentprisonSTORE={this.props.currentprisonSTORE}
+              getPrisonsWorkers={this.props.getPrisonsWorkers}
+              viewingprison={this.state.viewingprison}
+              toggleViewing={this.toggleViewing}
+              prisonsarraySTORE={this.props.prisonsarraySTORE}
+              gpLoading={this.props.gpLoading}
+              gwLoading={this.props.gwLoading}
+            />
           )}
-        />
-        <Route
-          path={"/prisons/:PrisonId"}
-          render={props => <ProfilesList {...props} />}
         />
       </div>
     );
@@ -35,10 +58,15 @@ class EmployerView extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  prisonsarraySTORE: state.prisonsarray
+  prisonsarraySTORE: state.prisonsarray,
+  currentprisonSTORE: state.currentprison,
+  gpLoading: state.gpLoading,
+  gwLoading: state.gwLoading
 });
 
-export default connect(
+const connectEmployerview = connect(
   mapStateToProps,
-  { getPrisons }
+  { getPrisons, getPrisonsWorkers }
 )(EmployerView);
+
+export default connectEmployerview;

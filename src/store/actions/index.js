@@ -36,5 +36,9 @@ export {
   GET_PRISONS_START,
   GET_PRISONS_SUCCESS,
   GET_PRISONS_FAILURE,
-  getPrisons
+  getPrisons,
+  GET_WORKERS_START,
+  GET_WORKERS_SUCCESS,
+  GET_WORKERS_FAILURE,
+  getPrisonsWorkers
 } from "./EmployerActions";
