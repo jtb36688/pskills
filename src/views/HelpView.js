@@ -1,6 +1,5 @@
 import React from 'react';
 import Help from '../components/Help/Help'
-import {} from 'reactstrap';
 
 class HelpView extends React.Component {
     constructor(props) {
@@ -9,7 +8,7 @@ class HelpView extends React.Component {
 
     render() {
         return (
-            "Hello World!"
+            <Help />
         )
     }
 }

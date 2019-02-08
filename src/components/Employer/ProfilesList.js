@@ -1,6 +1,5 @@
 import React from "react";
 import {} from "reactstrap";
-import Prison from "./Prison";
 import Loader from "react-loader-spinner";
 import {
   Jumbotron,
