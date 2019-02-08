@@ -76,3 +76,7 @@
 .ModalFlex {
   display: flex
 }
+
+.HomeLink {
+  color: yellow;
+}

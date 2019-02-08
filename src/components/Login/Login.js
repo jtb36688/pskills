@@ -5,93 +5,112 @@ import {} from "reactstrap";
 import { NavLink } from "react-router-dom"
 
 const LoginContainer = styled.div`
-  background-color: #2a2f4a;
-  color: white;
-  width: 100%;
-  height: 100%;
-  font-size: 1.8rem;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
-  h1 {
-    font-size: 28px;
-  }
+ background-color: rgb(140,140,140);
+ color: white;
+ min-width: 300px;
+ height: 100%;
+ font-size: 1.8rem;
+ font-family: "Source Sans Pro", Helvetica, sans-serif;
+ h1 {
+   font-size: 28px;
+ }
 `;
 
 const LoginDialog = styled.div`
-  height: 500px;
-  border-radius: 5px;
+ height: 500px;
+ border-radius: 5px;
 `;
 
 const LoginForm = styled.form`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 150px;
-  border: 1px solid #8b9dc3;
+ height: 100%;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-evenly;
+ align-items: center;
+ margin-top: 150px;
+ border: 1px solid #8b9dc3;
 `;
 
 const InputsButtonsDiv = styled.div`
-  display: flex;
-  height: 35%;
-  width: 65%;
-  justify-content: space-between;
-  align-items: center;
-`;
+ display: flex;
+ width: 100%;
+ height: 35%;
+ justify-content: center;
+
+ `;
 
 const InputsDiv = styled.div`
-  height: 100%;
-  width: 75%;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
-`;
+  width:100%;
+  align-items:center;
+
+ `;
 
 const UsernameDiv = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
+ display: flex;
+ align-items: baseline;
+ width:100%;
+ justify-content:center;
 `;
 
 const PasswordDiv = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: baseline;
+ display: flex;
+ align-items: baseline;
+ margin-left: 5px;
+ width:100%;
+ justify-content:center;
 `;
 
 const UsernameInput = styled.input`
-  margin-left: 20px;
-  border: 0;
-  color: black;
-  background-color: #ffffff;
-  height: 40px;
-  border-radius: 3px;
-  font-size: 1.8rem;
-  text-align: center;
-  width: 60%;
-  font-weight: bold;
+ margin-left: 18px;
+ border: 0;
+ color: black;
+ background-color: #ffffff;
+ height: 40px;
+ border-radius: 3px;
+ font-size: 1.8rem;
+ text-align: center;
+ width:60%;
+
 `;
 
 const PasswordInput = styled.input`
-  margin-left: 20px;
-  border: 0;
-  color: black;
-  background-color: #ffffff;
-  height: 40px;
-  font-size: 1.8rem;
-  border-radius: 3px;
-  text-align: center;
-  width: 60%;
-  font-weight: bold;
+ margin-left: 20px;
+ border: 0;
+ color: black;
+ background-color: #ffffff;
+ height: 40px;
+ font-size: 1.8rem;
+ border-radius: 3px;
+ text-align: center;
+ width:60%;
+
+`;
+const LogRegButtons = styled.div`
+display:flex;
+width:60%;
+justify-content:space-around;
 `;
 
 const LoginButton = styled.button`
-  display: block;
-  height: 50px;
-  width: 100px;
-  border-radius: 5px;
-  color: white;
-  background-color: #372a4a;
+ display: block;
+ height: 50px;
+ width: 100px;
+ border-radius: 5px;
+ color: white;
+ background-color: midnightblue;
+ cursor:pointer;
+`;
+const RegisterButton = styled.button`
+ display: block;
+ height: 50px;
+ width: 100px;
+ border-radius: 5px;
+ color: white;
+ background-color: midnightblue;
+ cursor:pointer;
 `;
 
 class Login extends React.Component {
@@ -106,7 +125,7 @@ class Login extends React.Component {
       <LoginContainer>
         <LoginDialog>
           <LoginForm onSubmit={this.props.submitLogin}>
-          <NavLink to="/">Return To Homepage</NavLink>
+          <NavLink className='HomeLink' to="/">Return To Homepage</NavLink>
             <h1 className="LoginTitle">Admin Login</h1>
             Please Login:
             <InputsButtonsDiv>
@@ -130,14 +149,16 @@ class Login extends React.Component {
                   />
                 </PasswordDiv>
               </InputsDiv>
-              <LoginButton type="submit">Login</LoginButton>
             </InputsButtonsDiv>
+            <LogRegButtons>
+            <LoginButton type="submit">Login</LoginButton>
+            <RegisterButton type="submit" onClick={this.props.toggleRegister}> Register</RegisterButton>
+            </LogRegButtons>
           </LoginForm>
         </LoginDialog>
-        <button onClick={this.props.toggleRegister}> Register New User </button>
       </LoginContainer>
     );
   }
-}
+ }
 
 export default Login;
