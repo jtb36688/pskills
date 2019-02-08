@@ -9,11 +9,9 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import rootReducer from "./store/reducers";
-import AdminView from "./views/AdminView";
 import Authentication from "./components/Login/Authentication";
 import EmployerView from "./views/EmployerView";
 import HelpView from "./views/HelpView";
-import Login from "./components/Login/Login";
 import Navigation from "./components/Navigation/Navigation";
 import { withRouter } from "react-router-dom"
 

@@ -4,10 +4,6 @@ import ProfilesList from "./ProfilesList";
 import Loader from "react-loader-spinner";
 
 class EmployerHome extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div>

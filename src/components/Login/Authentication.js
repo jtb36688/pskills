@@ -1,8 +1,6 @@
 import React from "react";
 import {} from "reactstrap";
-import axios from "axios";
 import Register from "./Register";
-import { withRouter, Route } from "react-router-dom";
 import {
   dismissLoginError,
   loginUser,

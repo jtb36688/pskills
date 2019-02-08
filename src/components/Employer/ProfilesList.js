@@ -1,5 +1,4 @@
 import React from "react";
-import {} from "reactstrap";
 import Loader from "react-loader-spinner";
 import {
   Jumbotron,
@@ -160,10 +159,6 @@ class ProfilesList extends React.Component {
       </div>
     );
   }
-}
-
-{
-  /* src={this.parsebyID(this.state.viewid).picture} */
 }
 
 export default ProfilesList;

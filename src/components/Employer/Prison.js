@@ -7,7 +7,6 @@ import {
   CardSubtitle,
   Button
 } from "reactstrap";
-import { Link } from "react-router-dom";
 
 const Prison = props => {
   return (
