@@ -16,7 +16,7 @@ const Prison = props => {
       ) : (
         <CardBody className="FlexCard">
           <CardTitle className="CardName">{props.name}</CardTitle>
-          <CardSubtitle>Available Workers:{props.totalPrisoners}</CardSubtitle>
+          <CardSubtitle>Available Workers: {props.totalPrisoners}</CardSubtitle>
           <CardText>Location: {props.location}</CardText>
           <Button onClick={() => props.toggleViewing(props.id)} className="Purple">
             View Workers
