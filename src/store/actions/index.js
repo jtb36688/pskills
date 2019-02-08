@@ -29,7 +29,9 @@ export {
   logoutUser,
   LOGOUT_USER,
   PERSIST_LOGIN,
-  persistLogin
+  persistLogin,
+  DISMISS_LOGIN_ERROR,
+  dismissLoginError,
 } from "./LoginActions";
 
 export {

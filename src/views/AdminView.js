@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {} from "reactstrap";
 import WorkersMgmt from "../components/Admin/WorkersMgmt";
 import PrisonFactory from "../components/Admin/PrisonFactory";
@@ -12,12 +11,8 @@ import {
   getPrisons,
 } from "../store/actions";
 import { connect } from "react-redux";
-import Workers from "../components/Admin/Workers";
 
 class AdminView extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   componentDidMount() {
     this.props.getLinkedWorkers(this.props.prisonIdSTORE);
