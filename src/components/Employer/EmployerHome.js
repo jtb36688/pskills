@@ -21,7 +21,7 @@ class EmployerHome extends React.Component {
               />
             ) : (
               this.props.prisonsarraySTORE.map(
-                ({ name, location, workerscount, id }) => (
+                ({ name, location, totalPrisoners, id }) => (
                   <Prison
                     viewingprison={this.props.viewingprison}
                     toggleViewing={this.props.toggleViewing}
@@ -29,7 +29,7 @@ class EmployerHome extends React.Component {
                     id={id}
                     name={name}
                     location={location}
-                    workerscount={workerscount}
+                    totalPrisoners={totalPrisoners}
                   />
                 )
               )

@@ -14,9 +14,9 @@ const Prison = props => {
       {props.viewingprison ? (
         <div>{props.id}</div>
       ) : (
-        <CardBody>
-          <CardTitle>{props.name}</CardTitle>
-          <CardSubtitle>Available Workers:{props.workerscount}</CardSubtitle>
+        <CardBody className="FlexCard">
+          <CardTitle className="CardName">{props.name}</CardTitle>
+          <CardSubtitle>Available Workers:{props.totalPrisoners}</CardSubtitle>
           <CardText>Location: {props.location}</CardText>
           <Button onClick={() => props.toggleViewing(props.id)} className="Purple">
             View Workers
