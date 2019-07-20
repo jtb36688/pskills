@@ -20,6 +20,10 @@
   margin-top: 150px;
 }
 
+.TestAccount {
+  font-weight: 700;
+}
+
 .PrisonListWrapper {
   display: flex;
   flex-wrap: wrap;
