@@ -15,6 +15,11 @@
   text-transform: uppercase;
 }
 
+.Footer {
+  text-align: center;
+  margin-top: 150px;
+}
+
 .PrisonListWrapper {
   display: flex;
   flex-wrap: wrap;
