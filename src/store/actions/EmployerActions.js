@@ -7,7 +7,7 @@ export const GET_WORKERS_START = "GET_WORKERS_START"
 export const GET_WORKERS_SUCCESS = "GET_WORKERS_SUCCESS"
 export const GET_WORKERS_FAILURE = "GET_WORKERS_FAILURE" 
 
-const PrisonUrl = "https://prisoner-skills-backend.herokuapp.com/api/prisons";
+const PrisonUrl = "https://employeeskills.herokuapp.com/api/prisons";
 
 export const getPrisons = () => dispatch => {
     dispatch({ type: GET_PRISONS_START })

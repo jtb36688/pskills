@@ -3,7 +3,7 @@ import { Button } from "reactstrap";
 import axios from "axios";
 
 const registerEndpoint =
-  "https://prisoner-skills-backend.herokuapp.com/api/users/register";
+  "https://employeeskills.herokuapp.com/api/users/register";
 
 class Register extends React.Component {
   constructor(props) {

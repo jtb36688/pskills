@@ -16,10 +16,10 @@ export const ADD_PRISON_START = "ADD_PRISON_START";
 export const ADD_PRISON_SUCCESS = "ADD_PRISON_SUCCESS";
 export const ADD_PRISON_FAILURE = "ADD_PRISON_FAILURE";
 
-const PrisonUrl = "https://prisoner-skills-backend.herokuapp.com/api/prisons";
-const ServerUrl = "https://prisoner-skills-backend.herokuapp.com/api/prisoners";
+const PrisonUrl = "https://employeeskills.herokuapp.com/api/prisons";
+const ServerUrl = "https://employeeskills.herokuapp.com/api/prisoners";
 const LinkedProfiles =
-  "https://prisoner-skills-backend.herokuapp.com/api/prisoners/prison";
+  "https://employeeskills.herokuapp.com/api/prisoners/prison";
 
 export const getLinkedWorkers = prisonId => dispatch => {
   dispatch({ type: GET_LINKED_START });

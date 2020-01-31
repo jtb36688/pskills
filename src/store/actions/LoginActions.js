@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const loginEndpoint = `https://prisoner-skills-backend.herokuapp.com/api/users/login`
+const loginEndpoint = `https://employeeskills.herokuapp.com/api/users/login`
 
 export const LOGIN_USER_START = "LOGIN_USER_START";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";

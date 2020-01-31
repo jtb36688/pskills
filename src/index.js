@@ -37,6 +37,11 @@ class App extends React.Component {
         />
         <Route path="/admin/" render={props => <Authentication {...props} />} />
         <Route path="/help/" render={props => <HelpView {...props} />} />
+        <div className="Footer">
+          <p className="TestAccount">Test Account | Login: testadmin | Password: password</p>
+          <p>React Client created by Jacob Bryan as a front-end architect for his Lambda School build week team.</p>
+          <p>Favicon Provided by Jo Szczepanska at <a href="https://www.toicon.com/">https://www.toicon.com/</a></p>
+        </div>
       </div>
     );
   }
